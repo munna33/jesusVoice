@@ -1,0 +1,50 @@
+<div class="navbar navbar-default" >
+    <div class="container-fluid">
+       
+        <nav class="navbar navbar-fixed-top ">
+            
+             <img src="./assets/images/jesus_voice_ministries_logo_6_300x300.jpg" width="50" height="50" style="float: left"/>
+            
+            <div class="container ">
+                <a class="navbar-brand" routerLink="">Jesus Voice Minsitry</a>
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    </button>
+                </div>
+                <div id="navbar" class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav">
+                        
+                        <li class>
+                            <a routerLink="/events" >Events </a>
+                        </li>
+                        <li><a routerLink="/gallery">Gallery</a></li>
+                       
+                        <li class=" dropdown"><a routerLink="/members" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Members <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a routerLink="#">View Members</a></li>
+                                <li><a routerLink="#">Add New Member</a></li>
+                                <li><a routerLink="#">Bulk Upload</a></li>
+                            </ul>
+                        </li>
+                        <li ><a routerLink="/about" >About </a>
+                        </li>
+                        <li class=""><a routerLink="/contact" class="">Contact</a></li>
+                    </ul>
+                    <ul class="nav navbar-nav pull-right">
+                        <li ><a routerLink="#" class="dropdown-toggle " data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Signed in as  <span class="caret"></span></a>                          
+                         <ul class="dropdown-menu">
+                                <li><a routerLink="/login">Admin</a></li>
+                                <li><a routerLink="/login">Member</a></li>
+                            </ul>
+                        </li>
+                        <li class=""><a routerLink="#">Logout</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
