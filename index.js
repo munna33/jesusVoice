@@ -79,6 +79,36 @@ app.get("/doc/:id", async (req, res) => {
   }
 });
 
+app.get("/doc/byName/:name", async(req,res) => {
+  const driverFiles = await googleDriveInstance.files.list({
+    auth,
+    fields: "nextPageToken, files(id, name)",
+  });
+  const result = driverFiles.data.files.filter(item => item.name === req.params.name)
+  if(result.length > 0) {
+    try {
+      const readDocResponse = await googleFormInstance.forms.get({
+        auth,
+        formId: result[0].id,
+      });
+      const responseData = readDocResponse.data;
+      const resultData = {
+        formTitle: responseData.info.title,
+        formID: responseData.formId,
+        items: responseData.items[2],
+        linkedSheetId: responseData.linkedSheetId,
+        formUrl: responseData.responderUri,
+      };
+      res.send(resultData);
+    } catch (err) {
+      res.send({});
+    }
+  } else {
+    res.send({})
+  }
+  // res.json(result);
+})
+
 app.get("/sheets/:id", async (req, res) => {
   const spreadsheets = await googleSheetsInstance.spreadsheets.get({
     auth, //auth object
@@ -186,7 +216,7 @@ function formatAllSheetData(data) {
         if (value && value['RegID']) {
           if (entry.length >= 0) {
             // Make sure the entry has at least Registration ID
-            value['day'] = day;
+            value['Day'] = day;
             const registrationId = value["RegID"].trim(); // Assuming Registration ID is at index 2
             if (!groupedData[registrationId.toUpperCase()]) {
               groupedData[registrationId.toUpperCase()] = { data: [value] };
