@@ -24,6 +24,9 @@ app.use(
     origin: "*",
   })
 );
+fs.readFile('./config.json', (err, data) => {
+  console.log('configdata',data)
+})
 const auth = new google.auth.GoogleAuth({
   keyFile: "config.json",
   scopes: [
