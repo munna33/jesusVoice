@@ -186,6 +186,7 @@ function formatAllSheetData(data) {
         if (value && value['RegID']) {
           if (entry.length >= 0) {
             // Make sure the entry has at least Registration ID
+            value['day'] = day;
             const registrationId = value["RegID"].trim(); // Assuming Registration ID is at index 2
             if (!groupedData[registrationId.toUpperCase()]) {
               groupedData[registrationId.toUpperCase()] = { data: [value] };
@@ -201,7 +202,6 @@ function formatAllSheetData(data) {
               value["RegID"];
             groupedData[registrationId.toUpperCase()]["noOfDays"] =
               groupedData[registrationId.toUpperCase()].data.length;
-            groupedData[registrationId.toUpperCase()]["day"] = day
           }
         }
       });
