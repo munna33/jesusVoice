@@ -201,6 +201,7 @@ function formatAllSheetData(data) {
               value["RegID"];
             groupedData[registrationId.toUpperCase()]["noOfDays"] =
               groupedData[registrationId.toUpperCase()].data.length;
+            groupedData[registrationId.toUpperCase()]["day"] = day
           }
         }
       });
