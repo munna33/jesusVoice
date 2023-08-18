@@ -204,5 +204,5 @@ function getTotalScore(data) {
 }
 let port = process.env.PORT || 5001
 app.listen(port, () => {
-  console.log("server is running on 3000 port");
+  console.log("server is running on 3000 port", port);
 });
