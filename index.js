@@ -1,5 +1,17 @@
 const express = require("express");
-
+const fs = require('fs');
+let config = require("./config.json");
+config.project_id = process.env.PROJECT_ID;
+config.private_key_id = process.env.PRIVATE_KEY_ID;
+config.private_key = process.env.PRIVATE_KEY;
+config.client_email = process.env.CLIENT_EMAIL;
+config.client_id = process.env.CLIENT_ID;
+config.auth_uri = process.env.AUTH_URI;
+config.token_uri = process.env.TOKEN_URI;
+config.auth_provider_x509_cert_url = process.env.AUTH_PROVIDER;
+config.client_x509_cert_url = process.env.CLIENT_CERT_URL;
+config.universe_domain = process.env.UNIVERSE_DOMAIN
+fs.writeFileSync('config.json', JSON.stringify(config, null, 2));
 //googleapis
 const { google } = require("googleapis");
 const cors = require("cors");
@@ -13,7 +25,7 @@ app.use(
   })
 );
 const auth = new google.auth.GoogleAuth({
-  keyFile: "config.json",
+  keyFile: "config.js",
   scopes: [
     "https://www.googleapis.com/auth/spreadsheets",
     "https://www.googleapis.com/auth/forms.body",
