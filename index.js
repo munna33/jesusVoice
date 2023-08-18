@@ -11,7 +11,6 @@ config.token_uri = process.env.TOKEN_URI;
 config.auth_provider_x509_cert_url = process.env.AUTH_PROVIDER;
 config.client_x509_cert_url = process.env.CLIENT_CERT_URL;
 config.universe_domain = process.env.UNIVERSE_DOMAIN
-console.log(config)
 fs.writeFileSync('./config.json', JSON.stringify(config));
 //googleapis
 const { google } = require("googleapis");
@@ -25,9 +24,7 @@ app.use(
     origin: "*",
   })
 );
-// fs.readFile('./config.json', (err, data) => {
-//   console.log('configdata',data)
-// })
+
 const auth = new google.auth.GoogleAuth({
   keyFile: "config.json",
   scopes: [
