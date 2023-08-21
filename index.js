@@ -161,6 +161,7 @@ app.get("/score/:id", async (req, res) => {
       index: item.properties.index,
     };
   });
+  result.splice(0,1)
   let respData = [];
   respData = await getAllSpreadsheetData(result, req).then((data) => {
     const formatData = formatAllSheetData(data);
