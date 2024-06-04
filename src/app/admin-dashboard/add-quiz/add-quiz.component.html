@@ -1,0 +1,79 @@
+<div  class="card m-auto continer-fluid my-2" style="width: 100%; border: none;">
+    <div class="card-header bg-secondary" style="color: white;">
+      <b>Add Quiz Details</b> 
+   </div>
+   <div class="card-body" >
+    <form>
+        <div class="form-group">
+            <label for="exampleFormControlSelect1">Quiz For:</label>
+            <select class="form-control" id="exampleFormControlSelect1" [(ngModel)]="questionNumber" [ngModelOptions]="{standalone: true}">
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+            </select>
+          </div>
+      <div class="form-group">
+        <label for="quizFor">Quiz For:</label>
+        <select class="form-control" id="quizFor" [(ngModel)]="quizFor" [ngModelOptions]="{standalone: true}">
+          <option>Week 1</option>
+          <option>Week 2</option>
+          <option>Week 3</option>
+          <option>Week 4</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="question">Question:</label>
+        <textarea type="text" class="form-control" [(ngModel)]="question" id="question"  cols="10" rows="5" [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="opts">Options:</label>
+        <textarea class="form-control" id="opts" [(ngModel)]="options" rows="4" [ngModelOptions]="{standalone: true}"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="ans">Answer:</label>
+        <input class="form-control" id="ans" [(ngModel)]="answer"  [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="form-group">
+        <label for="mark">Marks For Question:</label>
+        <input type="number" class="form-control" [(ngModel)]="marks" id="mark"  [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <button class="btn btn-block bg-primary my-3 me-2" style="color: white;" [disabled]="questionList.length ==5" (click)="addQuestion()">Add Question</button>
+      <button class="btn btn-block bg-primary my-3" style="color: white;" (click)="submit()">Submit</button>
+    
+    </form>
+    <div class="card m-auto continer-fluid my-2" style="width: 100%; border: none;">
+        <div class="card-header bg-secondary" style="color: white;">
+           <b>Question Details</b> 
+        </div>
+        <div class="card-body" >
+            <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col" class="col-1">Ques. No</th>
+                    <th scope="col" class="col-11">Question </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let item of questionList">
+                    <th scope="row">{{item.number}}</th>
+                    <td>{{item.question}}</td>
+                    
+                  </tr>
+                  <!-- <tr>
+                    <th scope="row">2</th>
+                    <td>Question 2</td>
+                    
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>Question 3</td>
+                   
+                  </tr> -->
+                </tbody>
+              </table>
+        </div>
+    </div>
+   </div>
+  </div>

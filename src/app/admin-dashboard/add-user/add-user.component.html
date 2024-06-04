@@ -1,0 +1,30 @@
+<div  class="card m-auto continer-fluid my-2" style="width: 100%; border: none;">
+    <div class="card-header bg-secondary" style="color: white;">
+      <b>Add Quiz Details</b> 
+   </div>
+   <div class="card-body" >
+    <form>
+      <div class="form-group">
+        <label for="fname">Full Name:</label>
+        <input type="text" class="form-control" [(ngModel)]="fullName" id="fname"  cols="10" rows="5" [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="form-group">
+        <label for="vlgName">Village Name:</label>
+        <input class="form-control" id="vlgName" [(ngModel)]="villageName" rows="4" [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="form-group">
+        <label for="cName">Church Name:</label>
+        <input class="form-control" id="cName" [(ngModel)]="churchName" [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="form-group">
+        <label for="cNumber">Contact No:</label>
+        <input type="text" class="form-control" [(ngModel)]="contactNumber" id="cNumber" [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <div class="form-group">
+        <label for="occ">Occupation:</label>
+        <input type="text" class="form-control" [(ngModel)]="occupation" id="occ" [ngModelOptions]="{standalone: true}"/>
+      </div>
+      <button class="btn btn-block bg-primary my-3 me-2" style="color: white;" (click)="addUser()">Add User</button>
+    
+    </form>
+</div>

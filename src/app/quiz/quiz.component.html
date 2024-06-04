@@ -1,0 +1,53 @@
+<app-header></app-header>
+<div class="container-fluid">
+    <div class="card m-auto" style="width: 18rem; border: none;">
+        <img src="assets/images/logo.png" alt="" width="150" height="150" class=" d-inline-block my-3" style="margin-left: 50%;transform: translateX(-50%);">
+        <div class="card-body" style="text-align: left; font-size: 14px;">
+        <div class="row">
+            <div class="col">
+                <b>Name </b>
+            </div>
+            <p class="col card-title mb-2">: Mote Kumar</p>
+        </div>  
+        <div class="row">
+            <div class="col">
+                <b>Registration ID </b>
+            </div>
+            <p class="col card-text mb-2">: BS001</p>
+        </div>
+        </div>
+    </div>
+    <div class="card-title" style="text-align: center;"><h2>Question No: 1</h2></div>
+    <div class="card m-auto" >
+        <div class="card-header" style="font-size: 14px;font-weight: bold;">
+            అగ్ని గంధకముల తో మండు గుండము లో పాలుపొంది రెండవ మరణం పొందు వారు ఎవరు ?  
+        </div>
+        <div class="card-body options">
+            <ul class="list-group">
+                <li class="list-group-item d-flex  align-items-center">
+                    <input class="me-1" type="radio" name="answer1" value="పిరికివారును">
+                    పిరికివారును 
+                </li>
+                <li class="list-group-item d-flex  align-items-center">
+                <input class="me-1" type="radio" name="answer1" value="అవిశ్వాసులును">
+                అవిశ్వాసులును
+                </li>
+                <li class="list-group-item d-flex  align-items-center">
+                <input class="me-1" type="radio" name="answer1" value="అసహ్యులును">
+                అసహ్యులును
+                </li>
+                <li class="list-group-item d-flex  align-items-center">
+                <input class="me-1" type="radio" name="answer1" value="నరహంతకులును">
+                నరహంతకులును
+                </li>
+              </ul>
+        </div>
+    </div>
+    <div class="my-3" style="text-align: center;">
+        <button  class="btn btn-primary" (click)="nextQuestion()">Next</button>
+    </div>
+
+    <div class="timer" [ngClass]="{'danger': timeLeft <= 10}">
+       00 : {{timeLeft | number: '2.0-0'}}
+    </div>
+</div>
