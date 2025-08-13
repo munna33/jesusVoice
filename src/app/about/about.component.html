@@ -1,0 +1,142 @@
+<div class="about-us-header mt-1">
+  <strong>About Us</strong>
+</div>
+<div class="card p-2 m-3 mt-4">
+  <div class="about-us-header mt-1">
+    <strong>Program Vision and Purpose</strong>
+  </div>
+  <div class="about-us-objective">
+    This Bible reading program is meant to guide hearts toward spiritual growth
+    and a deeper connection with God. By making daily reading a habit, we aim to
+    strengthen faith, encourage godly living, and help each person discover
+    God’s purpose for their life.
+  </div>
+  <div class="address mt-5">
+    <div class="row d-flex">
+      <p class="mb-0"><b>Youtube Channel:</b></p>
+      <p>
+        <a href="https://www.youtube.com/@voiceofjesusbec" target="_blank"
+          ><i class="fab fa-youtube" style="color: red; font-size: 24px"></i
+          >Voice Of Jesus | యేసయ్య స్వరం</a
+        >
+      </p>
+    </div>
+    <div class="row d-flex">
+      <p class="mb-0"><b>Instagram:</b></p>
+      <p>
+        <a href="https://www.instagram.com/voiceofjesus_bec/" target="_blank"
+          ><i
+            class="fab fa-instagram fa-2x text-pink"
+            style="color: red; font-size: 24px"
+          ></i
+          >voiceofjesus_bec</a
+        >
+      </p>
+    </div>
+    <div class="row d-flex">
+      <p class="mb-0">
+        <u><b>Contact Us</b></u>
+      </p>
+      <p>ministryjesusvoice@gmail.com</p>
+    </div>
+    <div class="row d-flex">
+      <p class="mb-0">
+        <u><b>Supporting By</b></u>
+      </p>
+      <p class="mb-0">Believers Easter Church - Kamalapur</p>
+      <p class="mb-0">Hanamkonda, Telangana,</p>
+      <p>India - 505102</p>
+      <p>&</p>
+      <p class="mb-0">Berachah Praise Ministries - Malyal</p>
+      <p class="mb-0">Rajanna Sircilla, Telangana,</p>
+      <p>India - 505307</p>
+    </div>
+    <iframe
+      src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1895.32882293556!2d79.53441370132666!3d18.17967826783277!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a3337a249b5d7ff%3A0xd79835267bee77bb!2sBelivers%20Eastern%20Church%20Kamalapur!5e0!3m2!1sen!2sin!4v1754021777337!5m2!1sen!2sin"
+      width="600"
+      height="450"
+      style="border: 0"
+      allowfullscreen=""
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+  </div>
+</div>
+<div class="youtube-content m-4">
+  <div
+    id="carouselExampleIndicators"
+    class="carousel slide"
+    data-bs-ride="carousel"
+  >
+    <!-- Carousel indicators -->
+    <div class="carousel-indicators">
+      <div
+        *ngFor="let video of youtubeList; let i = index"
+        type="button"
+        data-bs-target="#carouselExampleIndicators"
+        [attr.data-bs-slide-to]="i"
+        [class.active]="i === 0"
+        [attr.aria-current]="i === 0 ? 'true' : null"
+        [attr.aria-label]="'Slide ' + (i + 1)"
+      ></div>
+    </div>
+
+    <!-- Carousel items -->
+    <div class="carousel-inner">
+      <div
+        *ngFor="let video of youtubeList; let i = index"
+        class="carousel-item"
+        [class.active]="i === 0"
+        (click)="trackVideoClick(video?.title)"
+      >
+        <a
+          href="https://www.youtube.com/embed/{{video.videoId }}?autoplay=1"
+          target="_blank"
+        >
+          <div class="card">
+            <img
+              [src]="video?.thumbnail"
+              class="d-block w-100"
+              [alt]="video?.title || 'Video thumbnail'"
+            />
+            <div class="carousel-caption d-none d-md-block">
+              <h5>{{ video?.title }}</h5>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <button
+      class="carousel-control-prev"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="prev"
+    >
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button
+      class="carousel-control-next"
+      type="button"
+      data-bs-target="#carouselExampleIndicators"
+      data-bs-slide="next"
+    >
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="pt-1 mb-4 mt-5" style="text-align: center">
+  <button
+    data-mdb-button-init
+    data-mdb-ripple-init
+    class="btn btn-primary bg-primary btn-lg btn-block"
+    type="button"
+    (click)="goBack()"
+  >
+    Go To Welcome Page
+  </button>
+</div>
+</div>
+

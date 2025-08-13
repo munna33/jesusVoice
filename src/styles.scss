@@ -1,4 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
+.bg-primary {
+   background-color: rgb(1 11 22) !important
+}
+
 .accordion-toggle {
     .btn-link {
          text-decoration: none;
@@ -24,3 +28,27 @@
  .modal-content {
    margin-top: 50%;
  }
+ .text-primary {
+   color: rgb(1 11 22) !important;
+   border:var(--bs-spinner-border-width) solid rgb(1 11 22) !important;
+ }
+ .active-user {
+    background-color: rgb(1 11 22) !important;
+    color: white !important;
+}
+.custom-tabs {
+   
+   font-weight: bold;
+    .nav-tabs {
+         border-top: 2px solid white;
+         background-color: rgb(1 11 22) !important;
+         color: white !important;
+      .nav-item a {
+         color: white !important;
+      }
+      .active a {
+         color: rgb(1 11 22) !important;
+      }
+    }
+  
+}

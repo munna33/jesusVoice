@@ -1,0 +1,130 @@
+<div class="container-fluid mt-3">
+    <!-- <div class="card m-auto" style="width: 90%; border: none;">
+        <img src="assets/images/logo.png" alt="" width="150" height="150" class=" d-inline-block my-3" style="margin-left: 50%;transform: translateX(-50%);">
+    </div> -->
+    <!-- <div class="row m-2">
+        <p class="col card-title text-align-center mb-2" style="text-align: center;font-weight: bold;">GENISIS</p>
+    </div> -->
+    <div class="card-body" style="margin-top: 20%" *ngIf="!confirmYourDetails">
+      <p style="text-align: center;"><strong><u>Check Your Details:</u></strong></p>
+        <div class="row mt-3">
+            <p class="col card-title text-align-center mb-2" style="text-align: right;font-weight: 500;">Your Name : </p>
+            <p class="col card-title text-align-center mb-2" >{{userDetails?.Name}}</p>
+        </div>
+        <div class="row ">
+            <p class="col card-title text-align-center mb-2" style="text-align: right;font-weight: 500;">Registration ID : </p>
+            <p class="col card-title text-align-center mb-2" >{{userDetails?.RegID}}</p>
+        </div>
+        <div class="row">
+            <p class="col card-title text-align-center mb-2" style="text-align: right;font-weight: 500;">Church Name : </p>
+            <p class="col card-title text-align-center mb-2" >{{userDetails?.Church}}</p>
+        </div>
+        <div class="row ">
+            <p class="col card-title text-align-center mb-2" style="text-align: right;font-weight: 500;">Village Name : </p>
+            <p class="col card-title text-align-center mb-2" >{{userDetails?.Village}}</p>
+        </div>
+        <div class="pt-1" style="text-align: center; margin-top: 10%;">
+          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-sm btn-block dashboard-btn" type="button" (click)="confirmYourDetails=true;">Confirm Your Details</button>
+      </div>
+    </div>
+    <div *ngIf="confirmYourDetails">
+        <div class="pt-1 mb-2" style="text-align: center; " *ngIf="!showQuizDetails">
+           
+            <div class="row mt-3 mb-3">
+              <p class="col card-title text-align-center mb-2" style="font-weight: bold;text-decoration: underline;">QUIZ - {{chapterName}}</p>
+              <!-- <p class="col card-title text-align-center mb-2" >{{userDetails?.Name}}</p> -->
+          </div>
+            <div class="row ">
+              <p class="col card-title text-align-center mb-2" style="text-align: right;font-weight: 500;">No Of Questions : </p>
+              <p class="col card-title text-align-center mb-2" style="text-align: left;">{{questionData?.length}}</p>
+          </div>
+          <div class="row ">
+              <p class="col card-title text-align-center mb-2" style="text-align: right;font-weight: 500;">Total Marks : </p>
+              <p class="col card-title text-align-center mb-2" style="text-align: left;">{{questionData?.length}}</p>
+          </div>
+          <div class="row ">
+              <p class="col card-title text-align-center mb-2" style="text-align: right;font-weight: 500;">Per Question :  </p>
+              <p class="col card-title text-align-center mb-2" style="text-align: left;">40 Seconds</p>
+          </div>
+          <div class="row ">
+              <p class="col card-title text-align-center mb-2" style="text-align: right;font-weight: 500;">Duration : </p>
+              <p class="col card-title text-align-center mb-2" style="text-align: left;">{{(questionData?.length * 40 / 60).toFixed(0)}} minutes</p>
+          </div>
+          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-sm btn-block dashboard-btn start-btn" type="button" (click)="showQuizDetails= !showQuizDetails; isQuizStarted = true; startTimer(chapterName)" [disabled]="isUserSubmitted(chapterName)">Start Quiz</button>
+          <p *ngIf="isUserSubmitted(chapterName)" style="color: red;font-size: 16px;margin: auto;text-align: center;">Your response already submitted!. For more details please contact us. Thank you</p>
+        </div>
+        <div class="card-body"  *ngIf="showQuizDetails">
+            <div class="container p-0 mt-5">
+                <div *ngIf="!quizCompleted; else resultTemplate">
+                  <div id="quizCarousel" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div 
+                        *ngFor="let question of questionData; let i = index" 
+                        [class.active]="i === currentQuestionIndex"
+                        class="carousel-item">
+                        <div class="card p-0 no-border" style="border: none;">
+                          <h6 class="mt-4 mb-4" style="padding-left: 10px;line-height: 22px;"> <b>Q{{questionNumber}}: {{ question?.Question }}</b></h6>
+                          <ul class="list-group">
+                            <li 
+                              *ngFor="let option of getOptions(question)" 
+                              class="list-group-item m-1"
+                              [class.active]="option === selectedAnswer"
+                              (click)="selectAnswer(option, question)">
+                              {{ option }}
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+              
+                  <div class="mt-3" style="text-align: center;">
+                    <button class="btn btn-primary" (click)="nextQuestion()">Next</button>
+                    <p class="mt-3">Time Left: </p>
+                    <p class="p-timer"><strong class="timer">{{ timeLeft }}</strong> </p> 
+                    <p>Seconds</p>
+                   
+                  </div>
+                </div>
+              
+                <ng-template #resultTemplate>
+                  <h2 *ngIf="loader" style="text-align: center;">Submitting your answers......</h2>
+                  <div class="text-center" *ngIf="message && !loader">
+                    <h2>Quiz Completed!</h2>
+                    <h3>{{message}}</h3>
+                    <p>Your score: {{ score }} / {{ questionData.length }}</p>
+                  </div>
+                  <div *ngIf="message && !loader">
+                    <ul class="list-group" style="height: 50vh;overflow-y: auto;">
+                      <li 
+                        *ngFor="let question of questionData; let i = index" 
+                        class="list-group-item">
+                        <p><strong>Q: </strong>{{ question?.Question }}</p>
+                        <p [ngClass]="{'red': getYourAnswer(question?.QNO)?.trim() != question?.Answer?.trim(), 'green': getYourAnswer(question?.QNO)?.trim() == question?.Answer?.trim()}"><strong >Your Answer:</strong> {{getYourAnswer(question?.QNO)}}   
+                          <span *ngIf="getYourAnswer(question?.QNO)?.trim() != question?.Answer?.trim()"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="red" class="bi bi-x" viewBox="0 0 20 20">
+                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+                          </svg></span>
+                        <span *ngIf="getYourAnswer(question?.QNO)?.trim() == question?.Answer?.trim()">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="green" class="bi bi-check" viewBox="0 0 20 20">
+                            <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425z"/>
+                          </svg>
+                        </span>
+                      </p>
+                       <p><strong>Correct Answer: </strong>{{question?.Answer}}</p>
+                      </li>
+                    </ul>
+                  </div>
+                  <!-- <button  data-mdb-button-init data-mdb-ripple-init style="margin-left: 50%;transform: translateX(-50%);" class="btn btn-primary bg-primary btn-sm btn-block dashboard-btn" type="button" (click)="sendMessage()">Share Result</button> -->
+                </ng-template>
+               
+              </div>
+             
+        </div>
+    </div>
+    <div class="spinner-border text-primary" role="status" *ngIf="loader" style="position: absolute;
+      top: 46%;
+      left: 47%;
+      scale: 2;">
+  </div>
+    <button *ngIf="!isQuizStarted || isUserSubmitted(chapterName)" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-sm btn-block dashboard-btn mt-3 mb-3" type="button" (click)="goToDashboard()">Go To Dashobard</button>
+</div>

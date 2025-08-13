@@ -10,13 +10,20 @@ import {Location} from '@angular/common';
 })
 export class RankDetailsComponent {
   rankDetails: any;
+  userDetails: any = {}; 
   constructor(
     private router: Router,
     private resultService: ResultService,
     private _location: Location
   ) {
-    if (this.router.getCurrentNavigation()?.extras?.state) {
+    
+  }
+  ngOnInit() {
+     this.userDetails = JSON.parse(sessionStorage.getItem('user') as string)
+if (this.router.getCurrentNavigation()?.extras?.state) {
       this.rankDetails = this.router.getCurrentNavigation()?.extras.state
+    } else {
+      this.rankDetails = JSON.parse(sessionStorage.getItem('rankDetails') as string)
     }
   }
   goBack() {

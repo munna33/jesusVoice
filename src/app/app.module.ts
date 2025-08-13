@@ -22,6 +22,14 @@ import { HttpClientModule } from '@angular/common/http';
 import { ModalPopupComponent } from './modal-popup/modal-popup.component';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { RankDetailsComponent } from './rank-details/rank-details.component';
+import { ExamResultsModalPopupComponent } from './exam-results-modal-popup/exam-results-modal-popup.component';
+import { OnlineQuizComponent } from './online-quiz/online-quiz/online-quiz.component';
+import { OnlineQuizChaptersComponent } from './online-quiz-chapters/online-quiz-chapters/online-quiz-chapters.component';
+import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { LeaderBoardComponent } from './leader-board/leader-board.component';
+import { OnlineQuizLeaderboardComponent } from './online-quiz-leaderboard/online-quiz-leaderboard.component';
+import { WeeklyPuzzleLeaderboardComponent } from './weekly-puzzle-leaderboard/weekly-puzzle-leaderboard.component';
+import { AboutComponent } from './about/about.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +45,15 @@ import { RankDetailsComponent } from './rank-details/rank-details.component';
     ResultComponent,
     AddUserComponent,
     ModalPopupComponent,
-    RankDetailsComponent
+    RankDetailsComponent,
+    ExamResultsModalPopupComponent,
+    OnlineQuizComponent,
+    OnlineQuizChaptersComponent,
+    WelcomePageComponent,
+    LeaderBoardComponent,
+    OnlineQuizLeaderboardComponent,
+    WeeklyPuzzleLeaderboardComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,

@@ -4,6 +4,7 @@ import { CarouselConfig } from 'ngx-bootstrap/carousel';
 import { ResultService } from '../services/result.service';
 import { BsModalService, BsModalRef, ModalOptions } from 'ngx-bootstrap/modal';
 import { ModalPopupComponent } from '../modal-popup/modal-popup.component';
+import * as CONFIG from '../config/config';
 
 @Component({
   selector: 'app-dashboard',
@@ -21,6 +22,7 @@ export class DashboardComponent {
   showScoreDetails: boolean = false;
   noWrapSlides = false;
   showIndicator = true;
+  showQuizDetails = false;
   open: boolean = true;
   disabled: boolean = true;
   userDetails: any = {};
@@ -28,6 +30,8 @@ export class DashboardComponent {
   scoreDetails: any[] = [];
   formsData: any[] = [];
   loader: boolean = false;
+  totlaDays: number = 0;
+  appType: string = '';
   constructor(
     private router: Router,
     private resultService: ResultService,
@@ -35,22 +39,49 @@ export class DashboardComponent {
   ) {
     if (this.router.getCurrentNavigation()?.extras?.state) {
       this.userDetails = this.router.getCurrentNavigation()?.extras.state;
-      console.log('user', this.userDetails);
     }
   }
   ngOnInit() {
-    this.loader = true;
-    this.resultService.getAllScore().subscribe((data) => {
-      // this.rankDetails = this.formatScoreData(data)
-      this.rankDetails = this.getRanks(data);
-      this.getYourScore(this.userDetails.RegID);
+    this.appType = sessionStorage.getItem('appType') as string;
+    if(sessionStorage.getItem('user') && sessionStorage.getItem('appType')) {
+      this.loader = true;
+      let rankDetailsOfSheet:any[] = [];
+      if(!sessionStorage.getItem('rankDetails') && !sessionStorage.getItem('yourScoreDetails')) {
+        // const sheets  = CONFIG.config.GOOGLE_SHEETS;
+        const sheet = this.appType === 'OLD_NEW' ? CONFIG.config.GOOGLE_SHEETS_B5.OLD_NEW : CONFIG.config.GOOGLE_SHEETS_B5.NEW
+          this.resultService.getAllScore(sheet).subscribe((data) => {
+            this.rankDetails = this.getRanks(data);
+            sessionStorage.setItem('rankDetails', JSON.stringify(this.rankDetails))
+            this.getYourScore(this.userDetails.RegID);
+            this.loader = false;
+          });
+        // })
+          
+        // })
+       
+      } else {
+        this.loader = false;
+        this.userDetails = JSON.parse(sessionStorage.getItem('user') as string)
+        this.scoreDetails = JSON.parse(sessionStorage.getItem('yourScoreDetails') as string)
+        this.rankDetails = JSON.parse(sessionStorage.getItem('rankDetails') as string)
+      }
+     if(!sessionStorage.getItem('totalDays')) {
+      this.resultService.getForms().subscribe((data: any) => {
+        this.formsData = data;
+        this.loader = false;
+        this.totlaDays = this.formsData.length;
+        sessionStorage.setItem('formData',JSON.stringify(this.formsData));
+        sessionStorage.setItem('totalDays', this.totlaDays.toString())
+      })
+     } else {
       this.loader = false;
-    });
-    this.resultService.getForms().subscribe((data: any) => {
-      this.formsData = data;
-      console.log('forms data', this.formsData)
-      this.loader = false;
-    })
+      this.totlaDays = parseInt(sessionStorage.getItem('totalDays') as string)
+     }
+      
+    } else {
+      this.router.navigateByUrl('/welcome')
+    }
+   
   }
   formatScoreData(data: any) {
     let result: any[] = [];
@@ -73,19 +104,29 @@ export class DashboardComponent {
   }
   getYourScore(id: any) {
     const yourData = this.rankDetails.find(
-      (item) => item.registrationID === id
+      (item) => item.registrationID.toUpperCase().trim() === id.toUpperCase().trim()
     );
     this.userDetails = {
       ...this.userDetails,
       rank: yourData.rank,
       score: yourData.score,
       totalScore: yourData.totalScore,
-      noOfDays: yourData.data.length,
-      totalDays: yourData.noOfDays,
+      noOfDays: yourData.noOfDays,
+      totalDays: this.totlaDays,
+      lastMonthScore: yourData.lastMonthScore
     };
     sessionStorage.setItem('user', JSON.stringify(this.userDetails));
     this.scoreDetails = yourData.data;
-    console.log(this.scoreDetails);
+   
+    this.scoreDetails = this.scoreDetails.sort((a: any, b: any) => {
+      let date1 = new Date(a.Date); 
+      let date2 = new Date(b.Date); 
+      if (date1 > date2) { return 1; } 
+      else if (date1 < date2) { return -1; } 
+      else { return 0; } 
+  }); 
+  this.scoreDetails.reverse();
+  sessionStorage.setItem('yourScoreDetails', JSON.stringify(yourData.data))
   }
   getRanks(data: any) {
     let sortArr: any = Object.entries(data).sort((a: any, b: any) => {
@@ -103,7 +144,6 @@ export class DashboardComponent {
       }
       return (data[entry[0]] = { ...data[entry[0]], rank: rank });
     });
-    console.log('rank data', data);
     return Object.values(data).sort((a: any, b: any) =>
       a.rank < b.rank ? -1 : 1
     );
@@ -126,10 +166,26 @@ export class DashboardComponent {
       config
     );
     this.modalRef.content.onClose.subscribe((result: any) => {
-      console.log('results', result);
   })
   }
   gotRanks() {
-    this.router.navigateByUrl('/ranks', {state:  this.rankDetails})
+    this.router.navigateByUrl('/leaderBoard', {state:  this.rankDetails})
+  }
+  getExamResults() {
+    const config: ModalOptions = {
+      initialState: {
+          args: {
+              title: "Your Submission Details",
+              message: "",
+              yesFunction: () => {  },
+              noFunction: () => {  }
+          },
+          // data,
+          formData: this.formsData 
+      }
+  }
+  }
+  launchOnlineQuiz() {
+    this.router.navigateByUrl('/online-quiz-chapters', {state:{user: this.userDetails}})
   }
 }

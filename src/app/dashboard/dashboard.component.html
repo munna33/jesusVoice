@@ -1,7 +1,7 @@
-<app-header></app-header>
+
 <div class="container-fluid">
     <div class="card m-auto" style="width: 90%; border: none;">
-        <img src="assets/images/logo.png" alt="" width="150" height="150" class=" d-inline-block my-3" style="margin-left: 50%;transform: translateX(-50%);">
+        <img src="assets/images/logo.png" alt="" width="100" height="100" class=" d-inline-block my-3" style="margin-left: 50%;transform: translateX(-50%);">
         <div class="card-body" style="text-align: left; font-size: 14px;">
           <div class="row">
             <div class="col">
@@ -35,25 +35,26 @@
           </div>
           <!-- <div class="row">
             <div class="col">
-                <b>Total Score </b>
+                <b>LastMonth Score </b>
             </div>
-            <p class="col card-text mb-2">: {{userDetails?.totalScore}}</p>
+            <p class="col card-text mb-2">: {{userDetails?.lastMonthScore}}</p>
           </div> -->
           <div class="row">
             <div class="col">
-                <b>Attemted Days/ Total Days </b>
+                <b>Attemted Days </b>
             </div>
-            <p class="col card-text mb-2">: {{userDetails?.noOfDays}} / {{userDetails?.totalDays}}</p>
+            <p class="col card-text mb-2">: {{userDetails?.noOfDays}}</p>
           </div>
       </div>
-      <div class="card m-auto continer-fluid my-2" style="height: 38vh;width: 100%; border: none;">
-        <div class="card-header bg-secondary" style="color: white;">
+      <div class="card m-auto continer-fluid my-2" style="display: contents; height: 38vh;width: 100%; border: none;">
+        <div class="card-header bg-secondary" style="color: white;" >
            <b>Quiz Details</b> 
         </div>
-        <div class="card-body" style="padding-left: 0px; padding-right: 0px;">
+        <div class="card-body" style="padding-left: 0px; padding-right: 0px; padding-bottom: 0px;">
           <ul class="list-group" >
-            <li class="list-group-item d-flex justify-content-between align-items-center"  *ngFor="let item of scoreDetails" (click)="openModalWithClass(item)">
-              <b>{{item.Day}}</b>
+            <li class="list-group-item d-flex justify-content-between align-items-center"  *ngFor="let item of scoreDetails; index as i" (click)="openModalWithClass(item)">
+              <b>{{item.Day}} </b>
+              <span>{{i === 0 && totlaDays == item.Day.split('_')[1] ? "(Not yet evaluated)": ""}}</span>
               <span class="badge bg-primary badge-pill">{{item.Score}}</span>
             </li>
            
@@ -61,14 +62,26 @@
         </div>
      </div>  
 
+     
     
-     <div class="pt-1 mb-4" style="text-align: center;">
-      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-lg btn-block" type="button" (click)="gotRanks()">Ranks</button>
+     <div class="pt-1 mt-4 mb-2" style="text-align: center;">
+      <button data-mdb-button-init data-mdb-ripple-init  class="btn btn-primary bg-primary btn-lg btn-block dashboard-btn"  type="button" (click)="gotRanks()">Ranks Dashboard</button>
     </div>
+     <div class="pt-1 mt-2 mb-2" style="text-align: center;">
+      <button data-mdb-button-init data-mdb-ripple-init  class="btn btn-primary bg-primary btn-lg btn-block dashboard-btn" type="button" (click)="launchOnlineQuiz()">Online Quiz Launch</button>
+    </div>
+     <!-- <div class="pt-1 mb-4" style="text-align: center;">
+      <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-lg btn-block" type="button" (click)="getExamResults()">Exam1 Results</button>
+    </div> -->
         
-    <div class="spinner-border text-primary" role="status" *ngIf="loader" style="position: absolute;
+    <!-- <div class="spinner-border text-primary" role="status" *ngIf="loader" style="position: absolute;
     top: 76%;
     left: 47%;
     scale: 2;">
-    </div>
+    </div> -->
+
+    <!-- <div class="footer text-center">
+      Believers Eastern Church Kamalapur <br>
+      <a href="https://www.youtube.com/@voiceofjesusbec" target="_blank">Voice Of Jesus | యేసయ్య స్వరం</a>
+    </div> -->
 </div>

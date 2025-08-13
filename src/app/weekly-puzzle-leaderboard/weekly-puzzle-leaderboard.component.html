@@ -1,0 +1,43 @@
+<!-- <app-header></app-header> -->
+<div class="card m-auto continer-fluid my-2" style="width: 100%; border: none">
+  <div
+    class="card-body p-0"
+    style="height: 60vh; overflow-y: auto; margin: 20px"
+  >
+    <ul class="list-group" *ngFor="let item of rankDetails">
+      <li class="list-group-item mb-1" aria-current="true" [ngClass]="{'active-user': item.RegistrationID?.toLowerCase() == userDetails.RegID?.toLowerCase()}">
+        <div class="row">
+          <div class="col-6 p-0">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">{{ item['RegistrationID'] }}</div>
+              <span style="font-size: 12px"
+                >Attempted Days: <b>{{ item.noOfAttemps }}</b></span 
+              >
+            </div>
+          </div>
+          <div class="col-3 p-0">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Marks</div>
+              <span style="font-size: 12px">{{ item.totalScore }}</span>
+            </div>
+          </div>
+          <div
+            class="col-3 d-flex"
+            style="
+              align-items: center;
+              text-align: right;
+              justify-content: flex-end;
+              padding: 0px;
+            "
+          >
+            <!-- Marks: <span > <h6 class="mx-2 m-auto"><b>{{item.score}}</b></h6></span> -->
+            Rank:
+            <span
+              ><h1 class="mx-2 m-auto">{{ item.rank }}</h1></span
+            >
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

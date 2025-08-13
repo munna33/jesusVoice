@@ -1,0 +1,31 @@
+<div class="container-fluid">
+    <div class="row m-2">
+        <p class="col card-title text-align-center mb-2" style="text-align: center;font-weight: bold;">BIBLE QUIZ CHAPTERS</p>
+    </div>
+    <div class="spinner-border text-primary" role="status" *ngIf="loader" style="position: absolute;
+      top: 46%;
+      left: 47%;
+      scale: 2;">
+  </div>
+    <div class="card-body" >
+        <ul class="list-group" style="height: 70vh;overflow-y: auto;">
+            <li 
+              *ngFor="let option of getChapters()" 
+              class="list-group-item"
+              [class.disable]="checkQuizOption(option)"
+              (click)="launchQuiz(option)"
+              >
+              {{ option }}
+              <span style="margin-left: 10%; font-size: 20px;border-radius: 100%;" [ngStyle]="{color: getFontColor(option)}"><strong>
+                {{chapterScore(option)}}
+              </strong></span>
+              <i style="float: right;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#0d6efd" class="bi bi-play-circle-fill" viewBox="0 0 20 20">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M6.79 5.093A.5.5 0 0 0 6 5.5v5a.5.5 0 0 0 .79.407l3.5-2.5a.5.5 0 0 0 0-.814z"/>
+                  </svg>
+              </i>
+            </li>
+          </ul>
+    </div>
+    <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-sm btn-block dashboard-btn" type="button" (click)="goToDashboard()" style="margin-left: 50%;transform: translateX(-50%);">Go To Dashobard</button>
+</div>

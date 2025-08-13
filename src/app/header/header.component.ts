@@ -7,11 +7,20 @@ import { Router } from '@angular/router';
   styleUrls: ['./header.component.scss']
 })
 export class HeaderComponent {
+  isUserLoggedIn: boolean = false;
   constructor(private router: Router) {
-
+    this.isUserLoggedIn = JSON.parse(sessionStorage.getItem('user') as string) ? true : false;
   }
   logout() {
     sessionStorage.removeItem('user')
-    this.router.navigateByUrl('/login')
+    sessionStorage.removeItem('rankDetails')
+    sessionStorage.removeItem('yourScoreDetails')
+    sessionStorage.removeItem('totalDays')
+    sessionStorage.removeItem('quizChapters')
+    sessionStorage.removeItem('appType')
+    sessionStorage.removeItem('onlineQuizRanks')
+    sessionStorage.removeItem('onlineQuizRanksDetails')
+    sessionStorage.removeItem('puzzleRanks')
+    this.router.navigateByUrl('/welcome')
   }
 }
