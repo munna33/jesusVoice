@@ -21,13 +21,13 @@ export class LoginComponent implements OnInit{
     this.appType = sessionStorage.getItem('appType') as string;
     if(sessionStorage.getItem('user') && this.appType) {
       const user: any = JSON.parse(sessionStorage.getItem('user') as any)
-      this.router.navigateByUrl('/dashboard', {state: user})
+      this.router.navigateByUrl('/bible-study/dashboard', {state: user})
     } else {
       if(sessionStorage.getItem('appType')) {
-        this.router.navigateByUrl('/login')
+        this.router.navigateByUrl('/bible-study/login')
       } else {
         sessionStorage.removeItem('appType');
-        this.router.navigateByUrl('/welcome')
+        this.router.navigateByUrl('/bible-study/')
       }
     }
   }
@@ -45,7 +45,7 @@ export class LoginComponent implements OnInit{
         regID: this.regID
       })
         sessionStorage.setItem('user', JSON.stringify(data['user']));
-        this.router.navigateByUrl('/dashboard', {state: data.user})
+        this.router.navigateByUrl('/bible-study/dashboard', {state: data.user})
       }
       this.loader =  false;
     })

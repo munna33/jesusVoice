@@ -12,6 +12,7 @@ export class UsermanagementService {
   baseUrl = ENV.BASE_URL;
   login(userData: any) {
     const url = this.baseUrl + '/login/'+CONFIG.config.LOGIN_SHEET;
+    // const url = this.baseUrl + '/admin/login';
     return this.httpClient.post(url, userData);
   }
    public sendEvent(eventName: string, eventParams: { [key: string]: any }): void {
@@ -28,5 +29,24 @@ export class UsermanagementService {
   getYoutubeVideos() {
     const url = this.baseUrl + '/youtube/latestVideos'
     return this.httpClient.get(url);
+  }
+  uploadFile(file: File, parentCollection: string) {
+    const formData = new FormData();
+    formData.append('file', file);
+    formData.append('parentCollection', parentCollection);
+    const url = this.baseUrl + '/admin/upload';
+    return this.httpClient.post(url, formData);
+  }
+  getAllUsers() {
+    const url = this.baseUrl + '/admin/getAllUsers';
+    return this.httpClient.get(url);
+  }
+  getAllCollections() {
+    const url = this.baseUrl + '/admin/getAllCollections';
+    return this.httpClient.get(url);
+  }
+  prayerRequest(prayerData: any) {
+    const url = this.baseUrl + '/admin/prayerRequest';
+    return this.httpClient.post(url, prayerData);
   }
 }

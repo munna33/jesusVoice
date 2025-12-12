@@ -1,42 +1,110 @@
 <div class="container-fluid">
-    <button class="btn btn-block bg-primary my-3" style="color: white;">Add User</button>
-    <div class="card m-auto continer-fluid my-2" style="width: 100%; border: none;">
-        <div class="card-header bg-secondary" style="color: white;">
-           <b>User Details</b> 
-        </div>
-        <div class="card-body" >
-            <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Registration ID</th>
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Village Name</th>
-                    <th scope="col">Church Name</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Mote Kumar</td>
-                    <td>Hyderabad</td>
-                    <td>Believers Church Kamalapur</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">3</th>
-                    <td>Larry</td>
-                    <td>the Bird</td>
-                    <td>@twitter</td>
-                  </tr>
-                </tbody>
-              </table>
-        </div>
+  <div
+    class="card m-auto continer-fluid my-2"
+    style="width: 100%; border: none"
+  >
+    <div class="card-header bg-secondary" style="color: white">
+      <b>User Details</b>
     </div>
-   
-   
+    <div class="card-body">
+      <tabset>
+        <tab heading="Complete Bible Batch">
+            <div class="col-3 mt-3 mb-3" style="float:right">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search users..."
+              [(ngModel)]="searchOldNewTerm"
+              (ngModelChange)="filterOldNewUsers($event)"
+            />
+            </div>
+            <table class="table table-striped">
+            <thead>
+              <tr>
+               <th scope="col">Registration ID</th>
+              <th scope="col">Full Name</th>
+              <th scope="col">Church Name</th>
+              <th scope="col">Village Name</th>
+              <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+              *ngFor="
+                let user of pagedOldNewTestamentUsers;
+                let i = index
+              "
+              >
+              <td>{{ user["Reg No"] }}</td>
+              <td>{{ user["Full Name / పూర్తి పేరు"] }}</td>
+              <td>{{ user["Church Name / సంఘము పేరు"] }}</td>
+              <td>{{ user["Village Name / ఊరి పేరు"] }}</td>
+              <td></td>
+              </tr>
+            </tbody>
+            </table>
+          <pagination
+          *ngIf="!searchOldNewTerm"
+            [boundaryLinks]="true"
+            [directionLinks]="true"
+            [(ngModel)]="currentOldNewPage"
+            [totalItems]="totalItemsOldNewTestament"
+            [itemsPerPage]="itemsPerPage"
+            (pageChanged)="pageChangeEvent($event.page, 'Old_New Testament')"
+          ></pagination>
+        </tab>
+        <tab heading="New Testament Batch">
+          <div class="col-3 mt-3 mb-3" style="float:right">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Search users..."
+              [(ngModel)]="searchNewTerm"
+              (ngModelChange)="filterNewUsers($event)"
+            />
+            </div>
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Registration ID</th>
+                <th scope="col">Full Name</th>
+                <th scope="col">Church Name</th>
+                <th scope="col">Village Name</th>
+                <th scope="col">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let user of pagedNewTestamentUsers">
+                <td>{{ user["Reg No"] }}</td>
+                <td>{{ user["Full Name / పూర్తి పేరు"] }}</td>
+                <td>{{ user["Church Name / సంఘము పేరు"] }}</td>
+                <td>{{ user["Village Name / ఊరి పేరు"] }}</td>
+                <td></td>
+              </tr>
+            </tbody>
+          </table>
+          <pagination
+          *ngIf="!searchNewTerm"
+            [boundaryLinks]="true"
+            [directionLinks]="true"
+            [(ngModel)]="currentNewPage"
+            [totalItems]="totalItemsNewTestament"
+            [itemsPerPage]="itemsPerPage"
+            (pageChanged)="pageChangeEvent($event.page, 'New Testament')"
+          ></pagination>
+        </tab>
+      </tabset>
+    </div>
+    <div class="spinner-border text-primary" role="status" *ngIf="loader" style="position: absolute;
+    top: 76%;
+    left: 47%;
+    scale: 2;">
+    </div>
+    <!-- <button
+        class="btn btn-block bg-primary my-3 me-2"
+        style="color: white"
+        (click)="test(pagedNewTestamentUsers[0])"
+      >
+        Test
+      </button> -->
 </div>

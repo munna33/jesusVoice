@@ -13,6 +13,6 @@ export class WelcomePageComponent {
   }
   launchApp(appType: string) {
     sessionStorage.setItem('appType', appType);
-    this.router.navigateByUrl('/login');
+    this.router.navigateByUrl('/bible-study/login');
   }
 }

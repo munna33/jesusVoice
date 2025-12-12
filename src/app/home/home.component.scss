@@ -1,0 +1,63 @@
+:root {
+    --primary-color: #002349;
+    --secondary-color: #3498DB;
+    --accent-color: #E67E22;
+    --background-color: #F9F9F9;
+    --text-color: #333333;
+    --highlight-color: #27AE60;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.navbar {
+    background-color: #002349;
+    color: white;
+}
+.navbar-brand, .nav-item, .nav-link {
+    color: white
+}
+
+.nav-link:hover {
+    color: var(--secondary-color);
+}
+
+.btn-primary {
+    background-color: var(--accent-color);
+    border-color: var(--accent-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--secondary-color);
+    border-color: var(--secondary-color);
+}
+
+footer {
+    background-color: var(--primary-color);
+}
+
+.alert-success {
+    background-color: #002349;
+    color: white;
+}
+.jumbotron,.home-footer,.bible-study-btn, .card-body, .prayer-request-btn {
+    background-color: #002349 !important;
+    color: white;
+    border-radius: 0px !important;
+}
+.home-footer {
+    position: fixed;
+    width: 100%;
+    bottom: 0px;
+}
+.animated-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+}
+
+.animated-card:hover {
+    transform: translateY(-8px) scale(1.05);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}

@@ -11,20 +11,13 @@ import { OnlineQuizChaptersComponent } from './online-quiz-chapters/online-quiz-
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { LeaderBoardComponent } from './leader-board/leader-board.component';
 import { AboutComponent } from './about/about.component';
+import { HomeComponent } from './home/home.component';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
-  {path:"login", component: LoginComponent},
-  {path:"about", component: AboutComponent},
-  {path:"welcome", component: WelcomePageComponent},
-  {path: "dashboard", component: DashboardComponent},
-  {path: "quiz", component: QuizComponent},
-  {path: "admin", component: AdminDashboardComponent},
-  {path: "addQuiz", component: AddQuizComponent},
-  {path: 'leaderBoard', component: LeaderBoardComponent},
-  {path: "ranks", component: RankDetailsComponent},
-  {path: "online-quiz", component: OnlineQuizComponent},
-  {path: "online-quiz-chapters", component: OnlineQuizChaptersComponent},
-  {path:"", redirectTo:"/welcome", pathMatch: 'full'}
+  {path:"home", component: HomeComponent},
+  {path:"bible-study", loadChildren: () => import('./bible-study/bible-study.module').then(m => m.BibleStudyModule)},
+  {path:"", redirectTo:"/home", pathMatch: 'full'}
 ];
 
 @NgModule({

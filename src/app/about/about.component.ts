@@ -33,7 +33,6 @@ export class AboutComponent {
         thumbnail: item.snippet.thumbnails.medium.url
       }
     })
-    console.log('result', result)
     return result;
   }
   goBack() {

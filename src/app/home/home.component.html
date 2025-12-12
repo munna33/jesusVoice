@@ -1,0 +1,122 @@
+<nav class="navbar navbar-expand-lg">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Voice Of Jesus</a>
+    <button class="navbar-toggler" type="button" (click)="isCollapsed = !isCollapsed">
+    <span class="navbar-toggler-icon" style="filter: invert(1);"></span>
+    </button>
+    <div [collapse]="isCollapsed" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" routerLink="/bible-study/about">About</a></li>
+        <!-- <li class="nav-item"><a class="nav-link" href="#gallery">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+        <li class="nav-item"><a class="nav-link" href="#offerings">Offerings</a></li> -->
+        <li class="nav-item"><span class="nav-link" (click)="showPrayerRequest()">Prayer Request</span></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="jumbotron text-center text-white py-5">
+  <h1>Welcome to Voice Of Jesus | యేసయ్య స్వరం</h1>
+  <p>Growing together in faith, hope, and love.</p>
+</div>
+
+<!-- <div id="about" class="container my-5">
+  <h2>About Us</h2>
+  <p>Voice Of Jesus is committed to spreading the love of Christ, serving the community, and uplifting families through worship and outreach.</p>
+</div>
+
+<div id="gallery" class="container my-5">
+  <h2>Gallery</h2>
+  <div class="row">
+    <div class="col-md-4" *ngFor="let image of images">
+      <img [src]="image" alt="Gallery Image" class="img-fluid rounded mb-3">
+    </div>
+  </div>
+</div>
+
+<div id="services" class="container my-5">
+  <h2>Services</h2>
+  <ul class="list-group">
+    <li class="list-group-item">Sunday Worship – 10 AM</li>
+    <li class="list-group-item">Bible Study – Wednesdays at 7 PM</li>
+    <li class="list-group-item">Youth Fellowship – Fridays at 6 PM</li>
+  </ul>
+</div>
+
+<div id="offerings" class="container my-5">
+  <h2>Offerings</h2>
+  <p>Your offerings help support church activities, outreach programs, and community services. Give generously to make a difference.</p>
+</div>-->
+<div class="container my-5 text-center">
+    <h2>Bible Study Program - 2025</h2>
+    <p>Join our Bible Study journey and deepen your faith.</p>
+    <!-- <a routerLink="/bible-study" class="btn bible-study-btn mt-3">Go to Bible Study</a> -->
+    <p class="mb-4 text-highlight">Please choose one of the options below to log in to the Bible Study program.</p>
+    <div class="row justify-content-center">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 text-center">
+                <div class="card-body animated-card" (click)="launchApp('OLD_NEW')">
+                    <h5 class="card-title"><u>Old Testament + New Testament</u></h5>
+                    <p class="card-text">Study both the Old and New Testaments together for a comprehensive understanding.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 text-center">
+                <div class="card-body animated-card" (click)="launchApp('NEW')">
+                    <h5 class="card-title"><u>New Testament</u></h5>
+                    <p class="card-text">Focus on the teachings and life of Jesus through the New Testament.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="text-center my-4">
+    <button class="btn prayer-request-btn" (click)="showPrayerRequest()">
+        For Prayer Requests <span style="font-size: 1.2em;">👈</span>
+    </button>
+</div>
+<div *ngIf="showSuccessToast" class="toast-container position-fixed top-0 end-0 p-3" style="z-index: 1055;">
+    <div class="toast show align-items-center text-bg-success border-0" role="alert" aria-live="assertive" aria-atomic="true">
+        <div class="d-flex">
+            <div class="toast-body">
+                {{ successMessage }}
+            </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" aria-label="Close" (click)="showSuccessToast = false"></button>
+        </div>
+    </div>
+</div>
+<!-- <div id="prayer" class="container my-5">
+  <h2>Prayer Request</h2>
+  <form (ngSubmit)="submitPrayer()">
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Your Name" [(ngModel)]="prayer.name" name="name" required>
+    </div>
+    <div class="mb-3">
+      <input type="email" class="form-control" placeholder="Your Email" [(ngModel)]="prayer.email" name="email" required>
+    </div>
+    <div class="mb-3">
+      <textarea class="form-control" rows="4" placeholder="Your Prayer Request" [(ngModel)]="prayer.message" name="message" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>  -->
+
+<footer class="home-footer text-white text-center py-3">
+  &copy; Voice Of Jesus | యేసయ్య స్వరం. All rights reserved.
+</footer>
+
+<!-- Prayer Confirmation Modal -->
+<ng-template #confirmationTemplate>
+  <div class="modal-header">
+    <h5 class="modal-title">Thank You</h5>
+    <button type="button" class="btn-close" aria-label="Close" ></button>
+  </div>
+  <div class="modal-body">
+    <p>Your prayer request has been submitted successfully!</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn btn-secondary" >Close</button>
+  </div>
+</ng-template>

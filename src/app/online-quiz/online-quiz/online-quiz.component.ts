@@ -54,22 +54,38 @@ ngOnInit() {
       // alert('Back navigation is disabled');
       // this.submitQuiz();
     };
-  this.resultService.getTrackingDetails(this.trackID).subscribe(data => {
+  const requestPayload = {
+    "regID": this.userDetails?.RegID,
+    "appType": sessionStorage.getItem('appType'),
+    "quizID": this.chapterName
+  }
+
+  this.resultService.getTrackingDetails(requestPayload).subscribe(data => {
     if(data){
       this.userTrackingData = data;
     }
   })
+  // this.resultService.getTrackingDetails(this.trackID).subscribe(data => {
+  //   if(data){
+  //     this.userTrackingData = data;
+  //   }
+  // })
 }
 startTimer(chapterName: any) {
   const req = {
-   "Registration ID": this.userDetails?.RegID,
-    "Name": this.userDetails?.Name,
-    "Quiz ID": chapterName,
-    "Attempted": true,
-    "Date": new Date()
+   "regID": this.userDetails?.RegID,
+    "name": this.userDetails?.Name,
+    "quizID": chapterName,
+    appType: sessionStorage.getItem('appType')
   }
+  // const req = {
+  //  "Registration ID": this.userDetails?.RegID,
+  //   "Name": this.userDetails?.Name,
+  //   "Quiz ID": chapterName,
+  //   "Attempted": true,
+  //   "Date": new Date(),
+  // }
   this.resultService.trackSubmit(this.trackID, req).subscribe(data => {
-    console.log('tracked successfully')
   })
   this.interval = setInterval(() => {
     if (this.timeLeft > 0) {
@@ -80,7 +96,10 @@ startTimer(chapterName: any) {
   }, 1000);
 }
 isUserSubmitted(chapterName: string) {
-  if(this.userTrackingData && this.userTrackingData[chapterName] && this.userTrackingData[chapterName].filter((item: any) => item['Registration ID'] == this.userDetails?.RegID).length > 0) {
+  // if(this.userTrackingData && this.userTrackingData[chapterName] && this.userTrackingData[chapterName].filter((item: any) => item['Registration ID'] == this.userDetails?.RegID).length > 0) {
+  //   return true;
+  // }
+  if(this.userTrackingData && this.userTrackingData.isAttempted) {
     return true;
   }
   return false;
@@ -153,7 +172,7 @@ getOptions(question: any) {
 }
 goToDashboard() {
   // this._location.back();
-  this.router.navigateByUrl('/dashboard')
+  this.router.navigateByUrl('/bible-study/dashboard')
 }
 getYourAnswer(qno: any) {
   return this.yourAnswers.find((item:any) => item.QNO == qno)?.yourAnswer;
@@ -174,11 +193,87 @@ prepareTheResult() {
 }
 
 sendMessage() {
-  // const phoneNumber = '91'+this.userDetails?.Contact; // Use international format without '+'
+  const phoneNumber = '91'+this.userDetails?.Contact; // Use international format without '+'
   // console.log('phoneNumber', phoneNumber)
   // const message = encodeURIComponent(this.finalResult);
   // const url = `https://wa.me/${phoneNumber}?text=${message}`;
   
-  // window.open(url, '_blank');
+  // Generate certificate image with message
+  const canvas = document.createElement('canvas');
+  canvas.width = 600;
+  canvas.height = 400;
+  const ctx = canvas.getContext('2d');
+  if (ctx) {
+    // Background
+    ctx.fillStyle = '#f9f6ee';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    // Border
+    ctx.strokeStyle = '#c9a74b';
+    ctx.lineWidth = 8;
+    ctx.strokeRect(10, 10, canvas.width - 20, canvas.height - 20);
+
+    // Title
+    ctx.font = 'bold 32px Arial';
+    ctx.fillStyle = '#333';
+    ctx.textAlign = 'center';
+    ctx.fillText('Certificate of Completion', canvas.width / 2, 70);
+
+    // Message
+    ctx.font = '20px Arial';
+    ctx.fillStyle = '#444';
+    ctx.textAlign = 'center';
+    ctx.fillText(
+      `Congratulations ${this.userDetails?.Name}!`,
+      canvas.width / 2,
+      140
+    );
+    ctx.font = '18px Arial';
+    ctx.fillText(
+      `You have successfully completed the Online Quiz on "${this.chapterName}".`,
+      canvas.width / 2,
+      180
+    );
+    ctx.font = 'bold 22px Arial';
+    ctx.fillStyle = '#2e7d32';
+    ctx.fillText(
+      `Your Score: ${this.score} out of ${this.questionData.length}`,
+      canvas.width / 2,
+      230
+    );
+
+    // Date
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#555';
+    ctx.fillText(
+      `Date: ${new Date().toLocaleDateString()}`,
+      canvas.width / 2,
+      320
+    );
+
+    // Footer
+    ctx.font = 'italic 16px Arial';
+    ctx.fillStyle = '#888';
+    ctx.fillText(
+      'Bible Study 180 Days',
+      canvas.width / 2,
+      370
+    );
+
+    // Show image
+    const imgUrl = canvas.toDataURL('image/png');
+    const win = window.open('');
+    if (win) {
+      win.document.write(`<img src="${imgUrl}" alt="Certificate"/>`);
+    }
+  }
+    // Convert canvas image to base64 and send via WhatsApp
+  const imgUrl = canvas.toDataURL('image/png');
+  const message = encodeURIComponent(
+    `Certificate: ${imgUrl}`
+  );
+ const url = `https://wa.me/${phoneNumber}?text=${message}`;
+  
+  window.open(url, '_blank');
 }
 }

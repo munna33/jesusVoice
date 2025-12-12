@@ -30,43 +30,35 @@ import { LeaderBoardComponent } from './leader-board/leader-board.component';
 import { OnlineQuizLeaderboardComponent } from './online-quiz-leaderboard/online-quiz-leaderboard.component';
 import { WeeklyPuzzleLeaderboardComponent } from './weekly-puzzle-leaderboard/weekly-puzzle-leaderboard.component';
 import { AboutComponent } from './about/about.component';
+import { PaginationModule,PaginationConfig } from 'ngx-bootstrap/pagination';
+import { HomeComponent } from './home/home.component';
+import { BibleStudyComponent } from './bible-study/bible-study.component';
+import { CommonModule } from '@angular/common';
+import { CollapseModule } from 'ngx-bootstrap/collapse';
+import { PrayerRequestComponent } from './prayer-request/prayer-request.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    DashboardComponent,
+    HomeComponent,
+    BibleStudyComponent,
     HeaderComponent,
-    QuizComponent,
-    AdminDashboardComponent,
-    UserManagmentComponent,
-    QuizManagmentComponent,
-    AddQuizComponent,
-    ResultComponent,
-    AddUserComponent,
-    ModalPopupComponent,
-    RankDetailsComponent,
-    ExamResultsModalPopupComponent,
-    OnlineQuizComponent,
-    OnlineQuizChaptersComponent,
-    WelcomePageComponent,
-    LeaderBoardComponent,
-    OnlineQuizLeaderboardComponent,
-    WeeklyPuzzleLeaderboardComponent,
-    AboutComponent
+    PrayerRequestComponent,
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-    CarouselModule,
     BrowserAnimationsModule,
+    CollapseModule.forRoot(),
     HttpClientModule,
-    ModalModule.forRoot(),  
+    ModalModule.forRoot(),
     TabsModule.forRoot(),
-    AccordionModule.forRoot()
+    AccordionModule.forRoot(),
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [PaginationConfig],
+  bootstrap: [AppComponent],
+  exports: [HeaderComponent]
 })
 export class AppModule { }

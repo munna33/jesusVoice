@@ -79,7 +79,7 @@ export class DashboardComponent {
      }
       
     } else {
-      this.router.navigateByUrl('/welcome')
+      this.router.navigateByUrl('/bible-study/login')
     }
    
   }
@@ -100,7 +100,7 @@ export class DashboardComponent {
     return result;
   }
   goToQuiz() {
-    this.router.navigateByUrl('/quiz');
+    this.router.navigateByUrl('/bible-study/quiz');
   }
   getYourScore(id: any) {
     const yourData = this.rankDetails.find(
@@ -108,15 +108,15 @@ export class DashboardComponent {
     );
     this.userDetails = {
       ...this.userDetails,
-      rank: yourData.rank,
-      score: yourData.score,
-      totalScore: yourData.totalScore,
-      noOfDays: yourData.noOfDays,
+      rank: yourData?.rank,
+      score: yourData?.score,
+      totalScore: yourData?.totalScore,
+      noOfDays: yourData?.noOfDays,
       totalDays: this.totlaDays,
-      lastMonthScore: yourData.lastMonthScore
+      lastMonthScore: yourData?.lastMonthScore
     };
     sessionStorage.setItem('user', JSON.stringify(this.userDetails));
-    this.scoreDetails = yourData.data;
+    this.scoreDetails = yourData?.data;
    
     this.scoreDetails = this.scoreDetails.sort((a: any, b: any) => {
       let date1 = new Date(a.Date); 
@@ -126,7 +126,7 @@ export class DashboardComponent {
       else { return 0; } 
   }); 
   this.scoreDetails.reverse();
-  sessionStorage.setItem('yourScoreDetails', JSON.stringify(yourData.data))
+  sessionStorage.setItem('yourScoreDetails', JSON.stringify(yourData?.data))
   }
   getRanks(data: any) {
     let sortArr: any = Object.entries(data).sort((a: any, b: any) => {
@@ -169,7 +169,7 @@ export class DashboardComponent {
   })
   }
   gotRanks() {
-    this.router.navigateByUrl('/leaderBoard', {state:  this.rankDetails})
+    this.router.navigateByUrl('/bible-study/leaderBoard', {state:  this.rankDetails})
   }
   getExamResults() {
     const config: ModalOptions = {
@@ -186,6 +186,6 @@ export class DashboardComponent {
   }
   }
   launchOnlineQuiz() {
-    this.router.navigateByUrl('/online-quiz-chapters', {state:{user: this.userDetails}})
+    this.router.navigateByUrl('/bible-study/online-quiz-chapters', {state:{user: this.userDetails}})
   }
 }

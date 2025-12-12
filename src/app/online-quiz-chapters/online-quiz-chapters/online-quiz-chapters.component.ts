@@ -64,7 +64,7 @@ export class OnlineQuizChaptersComponent {
     Object.keys(questionData).forEach((item: any, index: any) => {
       if (resultData.hasOwnProperty(item.trim())) {
         result[item] = {
-          Questions: questionData[item.trim()],
+          Questions: questionData[item.trim()].Questions || questionData[item.trim()],
           'Your Score': this.getYourQuizScore(
             resultData[item.trim()],
             'Your Score'
@@ -75,7 +75,7 @@ export class OnlineQuizChaptersComponent {
           ),
         };
       } else {
-        result[item] = { Questions: questionData[item.trim()] };
+        result[item] = { Questions: questionData[item.trim()] || questionData[item.trim()] };
       }
     });
     sessionStorage.setItem('quizChapters', JSON.stringify(result));
@@ -96,7 +96,7 @@ export class OnlineQuizChaptersComponent {
     return [];
   }
   launchQuiz(option: string) {
-    this.router.navigateByUrl('/online-quiz', {
+    this.router.navigateByUrl('/bible-study/online-quiz', {
       state: {
         quizData: this.questionData[option].Questions,
         user: this.userDetails,
@@ -113,7 +113,7 @@ export class OnlineQuizChaptersComponent {
     return shuffled.slice(0, count);
   }
   goToDashboard() {
-    this.router.navigateByUrl('/dashboard');
+    this.router.navigateByUrl('/bible-study/dashboard');
   }
   getFontColor(option: any) {
     if (this.questionData[option]['Your Score']) {

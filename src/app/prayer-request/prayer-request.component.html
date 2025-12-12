@@ -1,0 +1,23 @@
+<div id="prayer" class="container my-3">
+  <h2>Prayer Request</h2>
+  <form (ngSubmit)="submitPrayer()">
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Name" [(ngModel)]="prayer.name" name="name" required>
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Contact No" [(ngModel)]="prayer.contactNo" name="contactNo" required>
+    </div>
+    <div class="mb-3">
+      <input type="text" class="form-control" placeholder="Address" [(ngModel)]="prayer.address" name="address" required>
+    </div>
+    <div class="mb-3">
+      <textarea class="form-control" rows="6" placeholder="Prayer Request" [(ngModel)]="prayer.request" name="request" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+<div *ngIf="loading" class="d-flex justify-content-center my-3">
+    <div class="spinner-border text-primary" role="status">
+        <span class="visually-hidden">Loading...</span>
+    </div>
+</div>
+</div> 

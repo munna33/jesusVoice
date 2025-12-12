@@ -19,7 +19,7 @@ export class WeeklyPuzzleLeaderboardComponent {
         : config.GOOGLE_SHEETS_B5.PUZZLE.NEW;
     if (!sessionStorage.getItem('puzzleRanks')) {
       this.resultService
-        .getPuzzleRankDetails(shhetID)
+        .getPuzzleRankDetails({appType: sessionStorage.getItem('appType')})
         .subscribe((data: any) => {
           // this.rankDetails = data['GENISIS/ఆదికాండము'];
           this.rankDetails = this.getRanks(data);

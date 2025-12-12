@@ -41,21 +41,33 @@ export class ResultService {
     return this.httpClient.post(url, requestObj)
   }
   trackSubmit(sheetId: any, requestObj: any) {
-    const url = this.baseUrl + '/quiz/track/'+ sheetId;
+    const url = this.baseUrl + '/admin/track';
     return this.httpClient.post(url, requestObj)
   }
-  getTrackingDetails(sheetId: any) {
-     const url = this.baseUrl + '/quiz/track/getDetails/'+ sheetId;
-    return this.httpClient.get(url, )
+  // trackSubmit(sheetId: any, requestObj: any) {
+  //   const url = this.baseUrl + '/quiz/track/'+ sheetId;
+  //   return this.httpClient.post(url, requestObj)
+  // }
+  getTrackingDetails(payload: any) {
+     const url = this.baseUrl + '/admin/getQuizTracker';
+    return this.httpClient.post(url, payload)
   }
+  // getTrackingDetails(sheetId: any) {
+  //    const url = this.baseUrl + '/quiz/track/getDetails/'+ sheetId;
+  //   return this.httpClient.get(url, )
+  // }
   getOnlineQuizRanksDetails(sheetId: any) {
  const url = this.baseUrl + '/getOnlineQuiz/score/'+sheetId;
 // const url = '../assets/data/data.json';
     return this.httpClient.get(url);
   }
-  getPuzzleRankDetails(sheetId: any) {
-     const url = this.baseUrl + '/getPuzzle/score/'+sheetId;
-    return this.httpClient.get(url);
+  getPuzzleRankDetails(postData: any) {
+     const url = this.baseUrl + '/admin/getPuzzleScore';
+    return this.httpClient.post(url,postData);
   }
+  // getPuzzleRankDetails(sheetId: any) {
+  //    const url = this.baseUrl + '/getPuzzle/score/'+sheetId;
+  //   return this.httpClient.get(url);
+  // }
   
 }
