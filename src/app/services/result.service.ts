@@ -32,6 +32,10 @@ export class ResultService {
     const url = this.baseUrl + '/getOnlineQuiz/'+ sheetId;
     return this.httpClient.get(url)
   }
+  getFinalOnlineQuiz(sheetId:any) {
+    const url = this.baseUrl + '/getOnlineFinalQuiz/'+ sheetId;
+    return this.httpClient.get(url)
+  }
   getOnlineQuizDetails(sheetId: any) {
     const url = this.baseUrl + '/quizDetails/'+ sheetId;
     return this.httpClient.get(url)
@@ -63,6 +67,18 @@ export class ResultService {
   }
   getPuzzleRankDetails(postData: any) {
      const url = this.baseUrl + '/admin/getPuzzleScore';
+    return this.httpClient.post(url,postData);
+  }
+  getProctoring(postData: any) {
+     const url = this.baseUrl + '/admin/api/proctor/frame';
+    return this.httpClient.post(url,postData);
+  }
+  trackVoilation(postData: any) {
+     const url = this.baseUrl + '/admin/api/proctor/violation';
+    return this.httpClient.post(url,postData);
+  }
+  sendResults(postData: any) {
+     const url = this.baseUrl + '/whatsapp/send-whatsapp';
     return this.httpClient.post(url,postData);
   }
   // getPuzzleRankDetails(sheetId: any) {

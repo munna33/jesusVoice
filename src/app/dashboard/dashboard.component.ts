@@ -186,6 +186,9 @@ export class DashboardComponent {
   }
   }
   launchOnlineQuiz() {
-    this.router.navigateByUrl('/bible-study/online-quiz-chapters', {state:{user: this.userDetails}})
+    this.router.navigateByUrl('/bible-study/online-quiz-chapters', {state:{user: this.userDetails, isFinalQuiz: false} })
+  }
+  launchFinalQuiz() {
+    this.router.navigateByUrl('/bible-study/online-quiz-chapters', {state:{user: this.userDetails, isFinalQuiz: true}})
   }
 }

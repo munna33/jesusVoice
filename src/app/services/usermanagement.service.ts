@@ -49,4 +49,9 @@ export class UsermanagementService {
     const url = this.baseUrl + '/admin/prayerRequest';
     return this.httpClient.post(url, prayerData);
   }
+  registerUser(userData: any) {
+    userData.sheetId = CONFIG.config.GOOGLE_SHEETS_B6.REGISTRATIONS;
+    const url = this.baseUrl + '/admin/registerUser';
+    return this.httpClient.post(url, userData);
+  }
 }

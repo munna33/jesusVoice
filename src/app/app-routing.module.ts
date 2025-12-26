@@ -13,9 +13,11 @@ import { LeaderBoardComponent } from './leader-board/leader-board.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { CommonModule } from '@angular/common';
+import { UserRegisterComponent } from './user-register/user-register.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
+  {path:"register", component: UserRegisterComponent},
   {path:"bible-study", loadChildren: () => import('./bible-study/bible-study.module').then(m => m.BibleStudyModule)},
   {path:"", redirectTo:"/home", pathMatch: 'full'}
 ];

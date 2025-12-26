@@ -36,6 +36,7 @@ import { BibleStudyComponent } from './bible-study/bible-study.component';
 import { CommonModule } from '@angular/common';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { PrayerRequestComponent } from './prayer-request/prayer-request.component';
+import { UserRegisterComponent } from './user-register/user-register.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +45,7 @@ import { PrayerRequestComponent } from './prayer-request/prayer-request.componen
     BibleStudyComponent,
     HeaderComponent,
     PrayerRequestComponent,
+    UserRegisterComponent,
   ],
   imports: [
     CommonModule,

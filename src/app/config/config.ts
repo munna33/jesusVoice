@@ -21,6 +21,15 @@ export var config = {
         PUZZLE: {
             OLD_NEW: '16zV0Y-0qmevEGMfIhDpZ9V4VaIOIB7unBEY0tlwjlHI',
             NEW: '11-aeH10bZK_iKQGfhMyO2j-lK2uXrK3KxaS0Yv3FNbI'
+        },
+        FINAL_QUIZ: {
+            OLD_NEW : '1DI4uJwTpE2SRKcAGrBpXrR7NawnQjXJmK2Lg_bb4N7Y'
+        },
+        FINAL_QUIZ_RESULTS: {
+            OLD_NEW : '1Zsc8cfYI77dlchMNlSGWZu3sgsaZ9m7OLX9XZ7d_NPE'
         }
+    },
+    GOOGLE_SHEETS_B6: {
+        REGISTRATIONS: '1Wupc_gHeMb_M7o5Qaict7w3klf4YkHstcnlS4-q18vk'
     }
 }

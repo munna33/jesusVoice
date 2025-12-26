@@ -5,6 +5,15 @@
     <!-- <div class="row m-2">
         <p class="col card-title text-align-center mb-2" style="text-align: center;font-weight: bold;">GENISIS</p>
     </div> -->
+  <div class="camera-box" [ngClass]="{'hide': quizCompleted}"> 
+      <video #video autoplay muted playsinline></video>
+      <span class="camera-label">Camera Active</span>
+    </div>
+
+    <canvas #canvas hidden ></canvas>
+
+
+
     <div class="card-body" style="margin-top: 20%" *ngIf="!confirmYourDetails">
       <p style="text-align: center;"><strong><u>Check Your Details:</u></strong></p>
         <div class="row mt-3">
@@ -24,7 +33,7 @@
             <p class="col card-title text-align-center mb-2" >{{userDetails?.Village}}</p>
         </div>
         <div class="pt-1" style="text-align: center; margin-top: 10%;">
-          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-sm btn-block dashboard-btn" type="button" (click)="confirmYourDetails=true;">Confirm Your Details</button>
+          <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-sm btn-block dashboard-btn" type="button" (click)="confirmYourDetails=true; this.startCamera();">Confirm Your Details</button>
       </div>
     </div>
     <div *ngIf="confirmYourDetails">
@@ -95,6 +104,12 @@
                     <p>Your score: {{ score }} / {{ questionData.length }}</p>
                   </div>
                   <div *ngIf="message && !loader">
+                    <!-- <p class="text-center col-8 m-auto mb-3"> We have been sent your results via WhatsApp to <strong>{{userDetails?.Contact}}</strong>.Please check your WhatsApp messages.</p> -->
+                    <p class="text-center col-8 m-auto">Thanks for your Participation. We will be sharing your rank and certificate shortly.</p>  
+                  </div>
+                 
+                 
+                  <!-- <div *ngIf="message && !loader">
                     <ul class="list-group" style="height: 50vh;overflow-y: auto;">
                       <li 
                         *ngFor="let question of questionData; let i = index" 
@@ -113,7 +128,7 @@
                        <p><strong>Correct Answer: </strong>{{question?.Answer}}</p>
                       </li>
                     </ul>
-                  </div>
+                  </div> -->
                 <!-- <button  *ngIf="userDetails?.Contact" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-sm btn-block dashboard-btn mt-3 mb-3" type="button" (click)="sendMessage()">Share Result</button> -->
                 </ng-template>
                

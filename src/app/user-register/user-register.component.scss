@@ -1,0 +1,29 @@
+.title {
+    background-color: #002349 !important;
+    color: #fff;
+    // position: fixed;
+    padding: 8px;
+    top: 0;
+    width: 100%;
+}
+.registration-container {
+    // margin-top: 35% !important;
+    height: 80vh;
+    overflow-y: auto;
+    // transform: translateY(-50%);
+}
+.register-btn {
+    background-color: #002349;
+    border-color: #002349;
+}
+.alert {
+    text-align: center;
+}
+.alert-heading {
+    text-align: center;
+}
+.copy-text {
+    cursor: pointer;
+    color: #002349;
+    text-decoration: underline;
+}
