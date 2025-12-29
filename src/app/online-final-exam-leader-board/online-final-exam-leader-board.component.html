@@ -1,0 +1,109 @@
+<!-- <app-header></app-header> -->
+<div class="card m-auto continer-fluid my-2" style="width: 100%; border: none">
+  <div
+    class="card-body p-0"
+    style="height: 60vh; overflow-y: auto; margin: 20px"
+  >
+   <!--  <ul class="list-group" *ngFor="let item of rankDetails">
+      <li class="list-group-item mb-1" aria-current="true"  [ngClass]="{'active-user': item.registrationID?.toLowerCase() == userDetails.RegID?.toLowerCase()}">
+        <div class="row">
+          <div class="col-6 p-0">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">{{ item['registrationID']}}</div>
+              <span style="font-size: 12px"
+                > <b>{{ item.name }}</b></span  
+              >
+            </div>
+          </div>
+          <div class="col-3 p-0">
+            <div class="ms-2 me-auto">
+              <div class="fw-bold">Marks</div>
+              <span style="font-size: 12px">{{ item['totalScore'] }}</span>
+            </div>
+          </div>
+          <div
+            class="col-3 d-flex"
+            style="
+              align-items: center;
+              text-align: right;
+              justify-content: flex-end;
+              padding: 0px;
+            "
+          >
+          
+            Rank:
+            <span
+              ><h1 class="mx-2 m-auto">{{ item.rank }}</h1></span
+            >
+          </div>
+        </div>
+       
+        <div >
+             <hr/>
+            <div>Final Exam Score: <strong>{{ item.finalExamScore }}</strong></div>
+            <div>Daily Quiz Score: <strong>{{item.dailyQuizCalculatedScore}}</strong> / {{ item.noOfDaysAttempted }}</div>
+            <div>Online Quiz Score: <strong>{{ item.onlineQuizCalculatedScore }}</strong> / {{ item.onlineQuizScore }}</div>
+        </div>
+      </li>
+    </ul> -->
+    <ul class="list-group" *ngFor="let item of rankDetails; let i = index">
+  <li
+    class="list-group-item mb-1"
+    aria-current="true"
+    (click)="toggleDetails(i)"
+    [ngClass]="{
+      'active-user': item.registrationID?.toLowerCase() == userDetails.RegID?.toLowerCase()
+    }"
+    style="cursor: pointer;"
+  >
+    <div class="row">
+      <div class="col-6 p-0">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">{{ item.registrationID }}</div>
+          <span style="font-size: 12px">
+            <b>{{ item.name }}</b>
+          </span>
+        </div>
+      </div>
+
+      <div class="col-3 p-0">
+        <div class="ms-2 me-auto">
+          <div class="fw-bold">Marks</div>
+          <span style="font-size: 12px">{{ item.totalScore }}</span>
+        </div>
+      </div>
+
+      <div
+        class="col-3 d-flex"
+        style="align-items: center; justify-content: flex-end; padding: 0px;"
+      >
+        Rank:
+        <span>
+          <h1 class="mx-2 m-auto">{{ item.rank }}</h1>
+        </span>
+      </div>
+    </div>
+
+    <!-- 🔽 Expandable Section -->
+    <div *ngIf="expandedIndex === i">
+      <hr />
+      <div>
+        Final Exam Score:
+        <strong>{{ item.finalExamScore }}</strong>
+      </div>
+      <div>
+        Daily Quiz Score:
+        <strong>{{ item.dailyQuizCalculatedScore }}</strong>
+        / {{ item.noOfDaysAttempted }}
+      </div>
+      <div>
+        Online Quiz Score:
+        <strong>{{ item.onlineQuizCalculatedScore }}</strong>
+        / {{ item.onlineQuizScore }}
+      </div>
+    </div>
+  </li>
+</ul>
+
+  </div>
+</div>

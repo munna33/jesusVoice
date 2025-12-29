@@ -21,6 +21,9 @@ export class HeaderComponent {
     sessionStorage.removeItem('onlineQuizRanks')
     sessionStorage.removeItem('onlineQuizRanksDetails')
     sessionStorage.removeItem('puzzleRanks')
+    sessionStorage.removeItem('onlineFinalQuizRanksDetails')
+    sessionStorage.removeItem('quizFinalChapters')
+    sessionStorage.removeItem('formData')
     this.router.navigateByUrl('/')
   }
 }

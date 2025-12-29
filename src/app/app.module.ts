@@ -37,6 +37,8 @@ import { CommonModule } from '@angular/common';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { PrayerRequestComponent } from './prayer-request/prayer-request.component';
 import { UserRegisterComponent } from './user-register/user-register.component';
+import { RegistrationidModalComponent } from './registrationid-modal/registrationid-modal.component';
+import { NgPipesModule } from 'ngx-pipes';
 
 @NgModule({
   declarations: [
@@ -46,6 +48,7 @@ import { UserRegisterComponent } from './user-register/user-register.component';
     HeaderComponent,
     PrayerRequestComponent,
     UserRegisterComponent,
+    RegistrationidModalComponent
   ],
   imports: [
     CommonModule,

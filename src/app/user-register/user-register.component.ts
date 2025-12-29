@@ -1,6 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UsermanagementService } from '../services/usermanagement.service';
+import { config } from '../config/config';
 
 @Component({
   selector: 'app-user-register',
@@ -20,8 +21,10 @@ export class UserRegisterComponent {
   @ViewChild('registerForm') registerForm!: NgForm;
   loader = false;
   isUserRegistered = false;
-  whatsAppLink = 'https://chat.whatsapp.com/GO1dX2F6CCK4QNfK9Xwlsh';
-  constructor(private service: UsermanagementService) { }
+  whatsAppLink = config.WHATSAP_GROUP_LINK ;
+  constructor(private service: UsermanagementService) { 
+    this.whatsAppLink = atob(this.whatsAppLink);
+  }
 
   register(form: NgForm) {
     if (form.invalid) {
@@ -45,7 +48,6 @@ export class UserRegisterComponent {
         this.loader = false;
         this.isUserRegistered = true;
         this.registrationID = response['registrationID'];
-        console.log('User registered successfully', response);
         form.resetForm();
       },
       error => {

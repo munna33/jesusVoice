@@ -98,14 +98,14 @@
               
                 <ng-template #resultTemplate>
                   <h2 *ngIf="loader" style="text-align: center;">Submitting your answers......</h2>
-                  <div class="text-center" *ngIf="message && !loader">
-                    <h2>Quiz Completed!</h2>
+                  <div class="text-center alert alert-success mt-5" *ngIf="message && !loader">
+                    <!-- <h2>Quiz Completed!</h2> -->
                     <h3>{{message}}</h3>
-                    <p>Your score: {{ score }} / {{ questionData.length }}</p>
+                    <p class="mb-0">Your score: {{ score }} / {{ questionData.length }}</p>
                   </div>
                   <div *ngIf="message && !loader">
                     <!-- <p class="text-center col-8 m-auto mb-3"> We have been sent your results via WhatsApp to <strong>{{userDetails?.Contact}}</strong>.Please check your WhatsApp messages.</p> -->
-                    <p class="text-center col-8 m-auto">Thanks for your Participation. We will be sharing your rank and certificate shortly.</p>  
+                    <p class="text-center col-8 alert-heading m-auto pb-3">Thanks for your Participation. We will be sharing your rank and certificate shortly.</p>  
                   </div>
                  
                  

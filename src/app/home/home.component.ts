@@ -2,6 +2,7 @@ import { Component, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { PrayerRequestComponent } from '../prayer-request/prayer-request.component';
+import { RegistrationidModalComponent } from '../registrationid-modal/registrationid-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -42,7 +43,6 @@ isCollapsed = true;
       }
     });
   this.modalRef?.content.confirm.subscribe((value: any) => {
-    console.log('Confirmed value from PrayerRequestComponent:', value);
     // You can handle the emitted value here
     this.successMessage = value;
     this.showSuccessToast = true;
@@ -63,5 +63,12 @@ isCollapsed = true;
   launchApp(appType: string) {
     sessionStorage.setItem('appType', appType);
     this.router.navigateByUrl('/bible-study/login');
+  }
+  gotoUserRegistration() {
+    this.router.navigateByUrl('/register');
+  }
+  getUserRegID() {
+    // this.router.navigateByUrl('/get-registration-id');
+    this.modalRef = this.modalService.show(RegistrationidModalComponent);
   }
 }

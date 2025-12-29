@@ -87,6 +87,8 @@ export class OnlineQuizComponent implements OnInit {
       this.userDetails = navigation.extras.state['user'];
       this.chapterName = navigation.extras.state['chapterName'];
       this.isFinalQuiz = navigation.extras.state['isFinalQuiz'];
+    } else {
+      this.router.navigateByUrl('/bible-study/dashboard');
     }
   }
 
@@ -159,7 +161,7 @@ export class OnlineQuizComponent implements OnInit {
     }
     return false;
   }
-  selectAnswer(option: string, question: any) {
+  selectAnswer(option: any, question: any) {
     let selectedAnswer = {
       QNO: question?.QNO,
       yourAnswer: option,
@@ -246,7 +248,7 @@ export class OnlineQuizComponent implements OnInit {
         0
       );
     this.resultService.sendResults({
-      to: '91'+this.userDetails?.Contact || '918096563934',
+      to: '91'+this.userDetails?.Contact || '',
       message: messageBody,
     }).subscribe();
     this.quizCompleted = true;
@@ -412,7 +414,7 @@ export class OnlineQuizComponent implements OnInit {
     } catch (err) {
       if (!this.quizCompleted) {
         alert('Camera access is mandatory to attend the exam');
-        location.reload();
+        // location.reload();
       }
     }
     this.disableUserActions();
@@ -422,7 +424,6 @@ export class OnlineQuizComponent implements OnInit {
 
   startProctoring() {
     const timeInterval = ((this.questionData.length * 40) / 2) * 1000;
-    console.log('proctoring interval', timeInterval);
     this.captureInterval = setInterval(() => {
       this.captureAndSend();
     }, timeInterval); // every 5 seconds

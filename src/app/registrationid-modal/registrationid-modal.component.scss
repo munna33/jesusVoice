@@ -1,0 +1,7 @@
+.table {
+    border: none !important;
+
+}
+.table>:not(:first-child) {
+    border-top: none !important;
+}

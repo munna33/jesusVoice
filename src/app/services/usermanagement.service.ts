@@ -54,4 +54,8 @@ export class UsermanagementService {
     const url = this.baseUrl + '/admin/registerUser';
     return this.httpClient.post(url, userData);
   }
+  getRegistrationID(mobileNumber: string) {
+    const url = this.baseUrl + '/admin/getUserByNumber?mobileNumber=' + mobileNumber;
+    return this.httpClient.get(url);
+  }
 }

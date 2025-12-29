@@ -42,7 +42,7 @@ export class OnlineQuizChaptersComponent {
       );
       this.loadFinalQuizRankData(quizResultID, this.questionData)
     } else {
-      this.resultService.getFinalOnlineQuiz(quizDetailsID).subscribe((data: any) => {
+      this.resultService.getFinalOnlineQuiz(quizDetailsID, this.appType).subscribe((data: any) => {
       if (data) {
         this.loader = false;
         let obj: Record<string, any> = {};
@@ -55,7 +55,6 @@ export class OnlineQuizChaptersComponent {
         }
         this.questionData =  obj;
         this.loadFinalQuizRankData(quizResultID, this.questionData)
-        console.log('final quiz data', this.questionData);
       }
     });
     }

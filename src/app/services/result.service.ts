@@ -32,8 +32,8 @@ export class ResultService {
     const url = this.baseUrl + '/getOnlineQuiz/'+ sheetId;
     return this.httpClient.get(url)
   }
-  getFinalOnlineQuiz(sheetId:any) {
-    const url = this.baseUrl + '/getOnlineFinalQuiz/'+ sheetId;
+  getFinalOnlineQuiz(sheetId:any, appType: string) {
+    const url = this.baseUrl + '/getOnlineFinalQuiz/'+ sheetId+'?appType='+appType;
     return this.httpClient.get(url)
   }
   getOnlineQuizDetails(sheetId: any) {
@@ -85,5 +85,8 @@ export class ResultService {
   //    const url = this.baseUrl + '/getPuzzle/score/'+sheetId;
   //   return this.httpClient.get(url);
   // }
-  
+  getFinalExamResults(sheetId: any, appType?: string) {
+     const url = this.baseUrl + '/getFinalOnlineExamScore/'+sheetId+'?appType='+appType;
+     return this.httpClient.get(url);
+  }
 }

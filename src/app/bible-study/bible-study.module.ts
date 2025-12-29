@@ -33,6 +33,8 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { OnlineFinalExamLeaderBoardComponent } from '../online-final-exam-leader-board/online-final-exam-leader-board.component';
+
 
 @NgModule({
     declarations: [
@@ -54,40 +56,41 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
     LeaderBoardComponent,
     OnlineQuizLeaderboardComponent,
     WeeklyPuzzleLeaderboardComponent,
+    OnlineFinalExamLeaderBoardComponent,
     AboutComponent
     ],
     imports: [
-        CommonModule,
-        FormsModule,
-        CarouselModule,
-        HttpClientModule,
-        PaginationModule,
-        ModalModule.forChild(),  
-        TabsModule.forRoot(),
-        AccordionModule.forRoot(),
-        RouterModule.forChild([
-            {
-                path: '',
-                component: BibleStudyComponent,
-                children: [
-                    // Add child routes here, e.g.:
-                    // { path: 'details', component: BibleStudyDetailsComponent }
-                      {path:"login", component: LoginComponent},
-                      {path:"about", component: AboutComponent},
-                      {path:"", component: WelcomePageComponent},
-                      {path: "dashboard", component: DashboardComponent},
-                      {path: "quiz", component: QuizComponent},
-                      {path: "admin", component: AdminDashboardComponent},
-                      {path: "addQuiz", component: AddQuizComponent},
-                      {path: 'leaderBoard', component: LeaderBoardComponent},
-                      {path: "ranks", component: RankDetailsComponent},
-                      {path: "online-quiz", component: OnlineQuizComponent},
-                      {path: "online-quiz-chapters", component: OnlineQuizChaptersComponent},
-                      {path:"", redirectTo:"/", pathMatch: 'full'}
-                    ]
-            }
-        ])
-    ],
+    CommonModule,
+    FormsModule,
+    CarouselModule,
+    HttpClientModule,
+    PaginationModule,
+    ModalModule.forChild(),
+    TabsModule.forRoot(),
+    AccordionModule.forRoot(),
+    RouterModule.forChild([
+        {
+            path: '',
+            component: BibleStudyComponent,
+            children: [
+                // Add child routes here, e.g.:
+                // { path: 'details', component: BibleStudyDetailsComponent }
+                { path: "login", component: LoginComponent },
+                { path: "about", component: AboutComponent },
+                { path: "", component: WelcomePageComponent },
+                { path: "dashboard", component: DashboardComponent },
+                { path: "quiz", component: QuizComponent },
+                { path: "admin", component: AdminDashboardComponent },
+                { path: "addQuiz", component: AddQuizComponent },
+                { path: 'leaderBoard', component: LeaderBoardComponent },
+                { path: "ranks", component: RankDetailsComponent },
+                { path: "online-quiz", component: OnlineQuizComponent },
+                { path: "online-quiz-chapters", component: OnlineQuizChaptersComponent },
+                { path: "", redirectTo: "/", pathMatch: 'full' }
+            ]
+        }
+    ])
+],
     exports: [
         
     ]
