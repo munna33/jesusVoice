@@ -48,7 +48,7 @@ import { NgPipesModule } from 'ngx-pipes';
     HeaderComponent,
     PrayerRequestComponent,
     UserRegisterComponent,
-    RegistrationidModalComponent
+    RegistrationidModalComponent,
   ],
   imports: [
     CommonModule,

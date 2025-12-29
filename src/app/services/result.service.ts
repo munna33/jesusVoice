@@ -89,4 +89,8 @@ export class ResultService {
      const url = this.baseUrl + '/getFinalOnlineExamScore/'+sheetId+'?appType='+appType;
      return this.httpClient.get(url);
   }
+  getBibleSchedule(sheetId: any) {
+    const url = this.baseUrl + '/bibleStudy/schedule/'+sheetId;
+    return this.httpClient.get(url);
+  }
 }

@@ -1,0 +1,78 @@
+// .calendar-cell {
+//   min-height: 110px;
+//   border-right: 1px solid #dee2e6;
+// }
+
+// .calendar-cell:last-child {
+//   border-right: none;
+// }
+
+// .scripture-text {
+//   font-size: 11px;
+//   line-height: 1.2;
+//   display: block;
+//   margin-top: 4px;
+//   width: 100% !important;
+// }
+.calendar-header,
+.calendar-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+}
+
+.calendar-header div {
+  text-align: center;
+  font-weight: 600;
+  padding: 6px 0;
+  color: #0F172A !important;
+  background: #E5EDFF !important;
+  border-bottom: 1px solid #CBD5E1 !important;
+}
+
+.calendar-cell {
+  min-height: 110px;
+  padding: 6px;
+  background: #F8FAFC !important;
+  border: 1px solid #E2E8F0 !important;
+}
+
+.calendar-cell:hover {
+  background: #EEF2FF !important;
+}
+
+.calendar-cell .day-number {
+  font-size: 14px;
+  font-weight: 600;
+  color: #0F172A !important;
+}
+
+.scripture-text {
+  font-family: 'NTR', sans-serif;  
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 1.35;
+  margin-top: 4px;
+  color: #334155 !important;
+  display: block;
+  word-break: break-word;
+}
+.today-cell {
+    border: 2px solid #0F172A !important;
+    background-color: #0F172A !important;
+    color: white !important;
+    .scripture-text {
+        color: white !important;
+    }
+}
+.prayer-request-btn {
+    background-color: #002349 !important;
+    color: white;
+    border-radius: 0px !important;
+    margin-left: 50% !important;
+    transform: translateX(-50%);
+    border-radius: 10px !important;
+}
+.schedule-scripture-text {
+   font-family: 'NTR', sans-serif;  
+   font-size: 20px;
+}

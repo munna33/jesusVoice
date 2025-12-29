@@ -11,7 +11,8 @@ export class UsermanagementService {
   constructor(private httpClient: HttpClient) { }
   baseUrl = ENV.BASE_URL;
   login(userData: any) {
-    const url = this.baseUrl + '/login/'+CONFIG.config.LOGIN_SHEET;
+    const loginSheet = userData.appType === 'OLD_NEW_BATCH6' ? CONFIG.config.GOOGLE_SHEETS_B6.LOGIN_SHEET_B6 : CONFIG.config.LOGIN_SHEET;  
+    const url = this.baseUrl + '/login/'+loginSheet;
     // const url = this.baseUrl + '/admin/login';
     return this.httpClient.post(url, userData);
   }

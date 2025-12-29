@@ -48,24 +48,40 @@
   <h2>Offerings</h2>
   <p>Your offerings help support church activities, outreach programs, and community services. Give generously to make a difference.</p>
 </div>-->
-<div class="scrolling-banner col-10 m-auto text-center">
-      <p class="scrolling-text">
-        🎉 New Bible Study Program 
-        
-      </p>
-      <p><strong>Bible Study In 354 Days (January - December)  </strong> </p>
-      <div class="text-center my-4">
+<div class="scrolling-banner col-12  pt-3 pb-3 m-auto text-center">
+   <h2>Bible Study Program - 2026</h2>
+   <p>Join our Bible Study journey and deepen your faith.</p>
+   <h5 class="card-title"><u>Old Testament + New Testament</u> <span class="card-text"> (Batch 6) </span></h5>                
+   <p class="card-text">Bible Study In 354 Days (1st January - 20th December) </p>
+  <p><strong></strong> </p>
+  
+  <div class="text-center my-4 d-flex justify-content-center gap-3 flex-wrap">
+    <button class="btn prayer-request-btn" (click)="goToSchedule()">
+      Bible Schedule 
+    </button>
+    <button class="btn prayer-request-btn" (click)="getUserRegID()">
+      Get Your Registration ID! 
+    </button>
+    
+  </div>
+  <div class="text-center my-4 d-flex justify-content-center gap-3 flex-wrap">
     <button class="btn prayer-request-btn" (click)="gotoUserRegistration()">
-        Register Here! <span style="font-size: 1.2em;">👈</span>
+      Register Here! <span style="font-size: 1.2em;">👈</span>
     </button>
-   
+    <!-- <button class="btn prayer-request-btn" (click)="getUserRegID()">
+      Login <span style="font-size: 1.2em;">👈</span>
+    </button> -->
+  </div>
+  <div class="card h-100 text-center">
+      <div class="card-body animated-card" (click)="launchApp('OLD_NEW_BATCH6')">
+          <h5 class="card-title"><u>Old Testament + New Testament</u></h5>
+          <p class="card-text">Study both the Old and New Testaments together for a comprehensive understanding.</p>
+      </div>
+  </div>
+
+  <!-- <hr /> -->
 </div>
- <button class="btn prayer-request-btn" (click)="getUserRegID()">
-        Get Your Registration ID! <span style="font-size: 1.2em;">👈</span>
-    </button>
-<hr />
-    </div>
-<div class="container my-5 text-center">
+<div class="scrolling-banner pt-3 pb-3 m-auto container my-5 text-center">
     <h2>Bible Study Program - 2025</h2>
     <p>Join our Bible Study journey and deepen your faith.</p>
     <!-- <a routerLink="/bible-study" class="btn bible-study-btn mt-3">Go to Bible Study</a> -->
@@ -104,21 +120,6 @@
         </div>
     </div>
 </div>
-<!-- <div id="prayer" class="container my-5">
-  <h2>Prayer Request</h2>
-  <form (ngSubmit)="submitPrayer()">
-    <div class="mb-3">
-      <input type="text" class="form-control" placeholder="Your Name" [(ngModel)]="prayer.name" name="name" required>
-    </div>
-    <div class="mb-3">
-      <input type="email" class="form-control" placeholder="Your Email" [(ngModel)]="prayer.email" name="email" required>
-    </div>
-    <div class="mb-3">
-      <textarea class="form-control" rows="4" placeholder="Your Prayer Request" [(ngModel)]="prayer.message" name="message" required></textarea>
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
-</div>  -->
 
 <footer class="home-footer text-white text-center py-2">
   &copy; Voice Of Jesus | యేసయ్య స్వరం. All rights reserved.

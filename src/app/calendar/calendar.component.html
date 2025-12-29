@@ -1,0 +1,100 @@
+<div class="container my-4">
+    <button class=" m-auto mb-4 btn prayer-request-btn" (click)="getTodaysSchedule()">
+        Get Today's Schedule
+    </button>
+    <!-- Header -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <button class="btn btn-outline-primary" (click)="prevMonth()">‹ Prev</button>
+
+        <h3 class="badge bg-primary fs-4 px-4 py-2">
+            {{ months[activeMonthIndex] }} {{ year }}
+        </h3>
+
+        <button class="btn btn-outline-primary" (click)="nextMonth()">Next ›</button>
+    </div>
+
+    <!-- Days Header -->
+    <div class="row fw-bold text-center border-bottom pb-2">
+        <div class="col">Sun</div>
+        <div class="col">Mon</div>
+        <div class="col">Tue</div>
+        <div class="col">Wed</div>
+        <div class="col">Thu</div>
+        <div class="col">Fri</div>
+        <div class="col">Sat</div>
+    </div>
+
+    <!-- Calendar Grid -->
+    <div *ngFor="let week of calendarDays" class="row row-cols-7 border-bottom">
+        <div *ngFor="let day of week" class="col p-2 calendar-cell today-cell" [ngClass]="{
+    'today-cell': day?.date && isToday(day.date)
+  }" (click)="openModal(day)">
+            <ng-container *ngIf="day">
+                <div class="fw-bold">{{ day.day }}</div>
+                <small class="text-muted scripture-text">
+                    {{ day.scripture }}
+                </small>
+            </ng-container>
+        </div>
+    </div>
+</div>
+<!-- Modal -->
+<div
+  class="modal fade show"
+  tabindex="-1"
+  [ngStyle]="{ display: showModal ? 'block' : 'none' }"
+  *ngIf="showModal"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content schedule-modal-content">
+
+      <div class="modal-header">
+        <h5 class="modal-title">📖 Bible Schedule for <strong>{{ selectedDateScripture?.date }}</strong></h5>
+        <button type="button" class="btn-close" (click)="closeModal()"></button>
+      </div>
+
+      <div class="modal-body">
+        <!-- <p class="scripture-text">
+
+          {{ selectedDateScripture?.scripture }}
+        </p> -->
+        <div class="row">
+         <div class="col-2 schedule-scripture-text text-end"><h4><strong>రోజు :</strong></h4></div>
+          <div class="col-10">
+            <h4 class="scripture-text schedule-scripture-text">
+              {{ selectedDateScripture?.day }}
+            </h4>
+          </div>
+        </div>
+        <div class="row">
+         <div class="col-2 schedule-scripture-text text-end"><h4><strong>తేది :</strong></h4></div>
+          <div class="col-10">
+            <h4 class="scripture-text schedule-scripture-text">
+              {{ selectedDateScripture?.date }}
+            </h4>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-10 ml-4 pl-3">
+            <h4 class="scripture-text schedule-scripture-text">
+              {{ selectedDateScripture?.scripture }}
+            </h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-secondary" (click)="copy()">Copy / Send </button>
+        <button class="btn btn-secondary" (click)="closeModal()">Close</button>
+      </div>
+
+    </div>
+  </div>
+</div>
+<div class="spinner-border text-primary" role="status" *ngIf="loader" style="position: absolute;
+    top: 56%;
+    left: 47%;
+    scale: 2;">
+    </div>
+<!-- Backdrop -->
+<div class="modal-backdrop fade show" *ngIf="showModal"></div>

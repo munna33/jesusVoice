@@ -30,7 +30,9 @@ export var config = {
         }
     },
     GOOGLE_SHEETS_B6: {
-        REGISTRATIONS: '1Wupc_gHeMb_M7o5Qaict7w3klf4YkHstcnlS4-q18vk'
+        REGISTRATIONS: '1Wupc_gHeMb_M7o5Qaict7w3klf4YkHstcnlS4-q18vk',
+        SCHEDULE: '1rNP4G6qgVKKaNT0N_qFSKoPCdHCoc3cAy6rs_8zlj0Q',
+        LOGIN_SHEET_B6: '1Wupc_gHeMb_M7o5Qaict7w3klf4YkHstcnlS4-q18vk'
     },
     WHATSAP_GROUP_LINK: 'aHR0cHM6Ly9jaGF0LndoYXRzYXBwLmNvbS9HTzFkWDJGNkNDSzRRTmZLOVh3bHNo'
 }

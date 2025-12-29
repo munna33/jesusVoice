@@ -67,6 +67,9 @@ isCollapsed = true;
   gotoUserRegistration() {
     this.router.navigateByUrl('/register');
   }
+  goToSchedule() {
+    this.router.navigateByUrl('/bible-study/bible-schedule');
+  }
   getUserRegID() {
     // this.router.navigateByUrl('/get-registration-id');
     this.modalRef = this.modalService.show(RegistrationidModalComponent);

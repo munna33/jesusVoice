@@ -34,6 +34,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { OnlineFinalExamLeaderBoardComponent } from '../online-final-exam-leader-board/online-final-exam-leader-board.component';
+import { BibleScheduleComponent } from '../bible-schedule/bible-schedule.component';
+import { CalendarComponent } from '../calendar/calendar.component';
 
 
 @NgModule({
@@ -57,7 +59,9 @@ import { OnlineFinalExamLeaderBoardComponent } from '../online-final-exam-leader
     OnlineQuizLeaderboardComponent,
     WeeklyPuzzleLeaderboardComponent,
     OnlineFinalExamLeaderBoardComponent,
-    AboutComponent
+    AboutComponent,
+    BibleScheduleComponent,
+    CalendarComponent
     ],
     imports: [
     CommonModule,
@@ -86,6 +90,7 @@ import { OnlineFinalExamLeaderBoardComponent } from '../online-final-exam-leader
                 { path: "ranks", component: RankDetailsComponent },
                 { path: "online-quiz", component: OnlineQuizComponent },
                 { path: "online-quiz-chapters", component: OnlineQuizChaptersComponent },
+                { path: 'bible-schedule', component: BibleScheduleComponent},
                 { path: "", redirectTo: "/", pathMatch: 'full' }
             ]
         }

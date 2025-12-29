@@ -191,10 +191,4 @@ export class DashboardComponent {
   launchFinalQuiz() {
     this.router.navigateByUrl('/bible-study/online-quiz-chapters', {state:{user: this.userDetails, isFinalQuiz: true}})
   }
-  // isAfter515PM(): boolean {
-  //   const now = new Date();
-  //   const targetTime = new Date();
-  //   targetTime.setHours(18, 50, 0, 0); // Set to 6:50 PM
-  //   return now >= targetTime;
-  // }
 }
