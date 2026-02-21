@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { UsermanagementService } from '../services/usermanagement.service';
+import { TranslateService } from '@ngx-translate/core';
 declare let gtag: Function;
 @Component({
   selector: 'app-login',
@@ -13,17 +14,19 @@ export class LoginComponent implements OnInit{
   loader: boolean = false;
   appType: string ='';
   constructor(private router: Router,
-    private userService: UsermanagementService
+    private userService: UsermanagementService, private translate: TranslateService
   ) {
-
+    const savedLang = localStorage.getItem('lang') || 'en';
+    this.translate.setDefaultLang(savedLang);
+    this.translate.use(savedLang);
   }
   ngOnInit() {
-    this.appType = sessionStorage.getItem('appType') as string;
-    if(sessionStorage.getItem('user') && this.appType) {
-      const user: any = JSON.parse(sessionStorage.getItem('user') as any)
+    this.appType = localStorage.getItem('appType') as string;
+    if(localStorage.getItem('user') && this.appType) {
+      const user: any = JSON.parse(localStorage.getItem('user') as any)
       this.router.navigateByUrl('/bible-study/dashboard', {state: user})
     } else {
-      if(sessionStorage.getItem('appType')) {
+      if(localStorage.getItem('appType')) {
         this.router.navigateByUrl('/bible-study/login')
       } else {
         sessionStorage.removeItem('appType');
@@ -36,15 +39,11 @@ export class LoginComponent implements OnInit{
     const payload = {
       name: this.fullName,
       regID: this.regID,
-      appType: sessionStorage.getItem('appType')
+      appType: localStorage.getItem('appType')
     }
     this.userService.login(payload).subscribe((data:any) => {
       if(data && data['user']) {
-      this.userService.sendEvent('login', {
-        appType: this.appType,
-        regID: this.regID
-      })
-        sessionStorage.setItem('user', JSON.stringify(data['user']));
+        localStorage.setItem('user', JSON.stringify(data['user']));
         this.router.navigateByUrl('/bible-study/dashboard', {state: data.user})
       }
       this.loader =  false;

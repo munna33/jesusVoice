@@ -1,0 +1,73 @@
+.fc {
+  font-size: 13px;
+}
+
+.fc-daygrid-day-number {
+  font-weight: bold;
+}
+
+.fc-day-today {
+  background-color: #002349 !important;
+}
+
+.fc-event {
+  border-radius: 6px;
+  padding: 2px 4px;
+}
+/* Disable other dates */
+.fc .disabled-day {
+  pointer-events: none;
+  background-color: gray;
+  opacity: 0.5;
+}
+
+/* Highlight active days */
+.fc .active-day {
+  background-color: #002349 !important;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* Today stronger highlight */
+.fc-day-today.active-day {
+  background-color: #002349 !important;
+  --background-color: #002349 !important;
+  --fc-today-bg-color: #002349 !important;
+  color: #fff;
+}
+.tabs-container {
+    height: 500px;
+    overflow-y: auto;
+    border: 1px solid #002349;
+}
+.bg-primary {
+    color: #fff;
+}
+.prevent-quiz {
+  pointer-events: none;
+  background-color: #bec4cb;
+  opacity: 0.5;
+}
+.prayer-request-btn {
+    background-color: #002349 !important;
+    color: white;
+    border-radius: 0px !important;
+    // margin-left: 50% !important;
+    // transform: translateX(-50%);
+    border-radius: 10px !important;
+}
+.badge {
+    background-color: #002349;
+    color: #fff;
+    border-radius: 50px;
+    padding: 12px;
+    margin: auto;
+}
+.enable-click {
+  cursor: pointer;
+  pointer-events: visible !important;
+}
+.disable-click {
+  pointer-events: none ;
+}

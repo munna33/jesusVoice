@@ -1,15 +1,15 @@
 <div class="registrationid-modal-container text-center mb-3">
-    <div class="form-group mt-3 text-center mb-3 col-8 m-auto">
+    <div class="form-group mt-3 text-center mb-3 col-10 m-auto">
         <label for="mobileNumber" class="form-label"> <strong>Enter your mobile number to get your Registration ID</strong></label>
         <input type="tel" id="mobileNumber" [(ngModel)]="mobileNumber" placeholder="Enter mobile number" class="form-control mobile-input col-9 m-auto">
     </div>
-    <button class="submit-btn btn btn-primary w-100 col-4" (click)="getRegistrationID()">Get Registration ID</button>
+    <button class="submit-btn btn btn-primary w-100 col-6" (click)="getRegistrationID()">Get Registration ID</button>
     
     <!-- <div *ngIf="registrationID" class="result mt-4">
         Your Registration ID is: <strong>{{ registrationID }}</strong>
     </div> -->
 
-    <div *ngIf="users && users.length > 0" class="alert alert-success col-8 m-auto mt-3" role="alert">
+    <div *ngIf="users && users.length > 0" class="alert alert-success col-10 m-auto mt-3" role="alert">
        
         <p class="mb-2"><strong>Your Details :</strong></p>
         <div class="table ">

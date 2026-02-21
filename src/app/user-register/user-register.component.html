@@ -92,7 +92,10 @@
             </div>
         </div>
 
-        <button type="submit" class="btn btn-primary btn-block register-btn mb-5" [disabled]="loader">Register</button>
+        <button type="submit" class="btn btn-primary btn-block register-btn mb-4" [disabled]="loader">Register</button>
+        <button class="m-auto mb-5 btn prayer-request-btn mb-5" (click)="goToHome()">
+         <i class="fa fa-arrow-left me-2"></i> Home
+        </button>
     </form>
     <div *ngIf="isUserRegistered" class="alert alert-success mt-5" role="alert">
         <h4 class="alert-heading m-auto pb-3">Thank You!</h4>
@@ -110,7 +113,9 @@
             <a href="javascript:location.reload()" class="btn btn-primary">New Registration</a>
         </p>
     </div>
+    
 </div>
+
 <div class="alert alert-info mt-3" role="alert" *ngIf="loader">
     <p class="mb-0">Please wait for a few seconds to complete the registration...</p>
 </div>

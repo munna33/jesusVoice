@@ -12,14 +12,14 @@ export class WeeklyPuzzleLeaderboardComponent {
   userDetails: any = {};
   constructor(private resultService: ResultService) {}
   ngOnInit() {
-    this.userDetails = JSON.parse(sessionStorage.getItem('user') as string);
+    this.userDetails = JSON.parse(localStorage.getItem('user') as string);
     const shhetID =
-      sessionStorage.getItem('appType') === 'OLD_NEW'
+      localStorage.getItem('appType') === 'OLD_NEW'
         ? config.GOOGLE_SHEETS_B5.PUZZLE.OLD_NEW
         : config.GOOGLE_SHEETS_B5.PUZZLE.NEW;
     if (!sessionStorage.getItem('puzzleRanks')) {
       this.resultService
-        .getPuzzleRankDetails({appType: sessionStorage.getItem('appType')})
+        .getPuzzleRankDetails({appType: localStorage.getItem('appType')})
         .subscribe((data: any) => {
           // this.rankDetails = data['GENISIS/ఆదికాండము'];
           this.rankDetails = this.getRanks(data);

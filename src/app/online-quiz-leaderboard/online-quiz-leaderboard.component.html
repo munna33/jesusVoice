@@ -2,7 +2,7 @@
 <div class="card m-auto continer-fluid my-2" style="width: 100%; border: none">
   <div
     class="card-body p-0"
-    style="height: 60vh; overflow-y: auto; margin: 20px"
+    style="height: 60vh; overflow-y: auto; margin: 0px 8px 8px 8px"
   >
     <ul class="list-group" *ngFor="let item of rankDetails">
       <li class="list-group-item mb-1" aria-current="true"  [ngClass]="{'active-user': item.RegistrationID?.toLowerCase() == userDetails.RegID?.toLowerCase()}">

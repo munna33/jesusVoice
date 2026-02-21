@@ -1,6 +1,7 @@
 <div class="container my-4">
-    <button class=" m-auto mb-4 btn prayer-request-btn" (click)="getTodaysSchedule()">
-        Get Today's Schedule
+
+    <button class="ml-1 mb-4 btn prayer-request-btn" (click)="goToHome()">
+         <i class="fa fa-arrow-left me-2"></i> Home
     </button>
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -62,7 +63,7 @@
          <div class="col-2 schedule-scripture-text text-end"><h4><strong>రోజు :</strong></h4></div>
           <div class="col-10">
             <h4 class="scripture-text schedule-scripture-text">
-              {{ selectedDateScripture?.day }}
+              {{ selectedDateScripture?.bibleStudyDay }}
             </h4>
           </div>
         </div>

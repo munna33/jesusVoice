@@ -4,8 +4,8 @@
         <div class="col-sm-6 text-black m-auto">
   
           <div class="px-5 ms-xl-4 my-5" style="text-align: center;">
-            <span class="h2 fw-bold mb-0">{{ appType === 'OLD_NEW' || appType === 'OLD_NEW_BATCH6' ? 'OLD + NEW Testaments': 'New Testament'}}</span>
-           <p><strong>Login</strong></p> 
+            <span class="h2 fw-bold mb-0">{{ appType === 'OLD_NEW' || appType === 'OLD_NEW_BATCH6'? ('LOGIN.OLD_NEW_TITLE' | translate): ('LOGIN.NEW_TITLE' | translate) }}</span>
+           <p><strong>{{ 'LOGIN.LOGIN_HEADING' | translate }}</strong></p> 
             
           </div>
           <img src="assets/images/logo.png" alt="" width="150" height="150" class=" d-inline-block my-3" style="text-align: center;
@@ -18,21 +18,21 @@
               <!-- <h3 class="fw-normal  pb-3" style="letter-spacing: 1px; text-align: center;">Log in</h3> -->
   
               <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="fullName">Full Name</label>
+                <label class="form-label" for="fullName">{{ 'LOGIN.FULL_NAME' | translate }}</label>
                 <input type="text" [(ngModel)]="fullName" [ngModelOptions]="{standalone: true}" id="fullName" class="form-control form-control-lg" />
                 
               </div>
   
               <div data-mdb-input-init class="form-outline mb-4">
-                <label class="form-label" for="regId">Registration ID</label>
+                <label class="form-label" for="regId">{{ 'LOGIN.REG_ID' | translate }}</label>
                 <input type="text" [(ngModel)]="regID" [ngModelOptions]="{standalone: true}" id="regId" class="form-control form-control-lg" />
               </div>
   
               <div class="pt-1 mb-4" style="text-align: center;">
-                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-lg btn-block" type="button" (click)="login()">Log In</button>
+                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-lg btn-block" type="button" (click)="login()">{{ 'LOGIN.LOGIN_BTN' | translate }}</button>
               </div>
               <div class="pt-1 mb-4 mt-4" style="text-align: center">
-                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-lg btn-block" type="button" (click)="goBack()">Go To Welcome Page</button>
+                <button data-mdb-button-init data-mdb-ripple-init class="btn btn-primary bg-primary btn-lg btn-block" type="button" (click)="goBack()">{{ 'LOGIN.GO_BACK_BTN' | translate }}</button>
               </div>
             </form>
   

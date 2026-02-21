@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ResultService } from '../services/result.service';
 import { config } from '../config/config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-calendar',
@@ -11,7 +12,7 @@ export class CalendarComponent {
 year = 2026;
 loader: boolean = false;
 showModal: boolean = false;
-selectedDateScripture: { date: string; scripture: any; day: any;fullName?: string } | undefined ;
+selectedDateScripture: { date: string;bibleStudyDay: string, scripture: any; day: any;fullName?: string } | undefined ;
   months = [
     'January','February','March','April','May','June',
     'July','August','September','October','November','December'
@@ -21,8 +22,9 @@ selectedDateScripture: { date: string; scripture: any; day: any;fullName?: strin
   calendarDays: any[][] = [];
 
   schedule: any = {};
-  constructor(private resultService: ResultService) {}
+  constructor(private resultService: ResultService, private router: Router) {}
   ngOnInit() {
+    this.activeMonthIndex = new Date().getMonth();
     this.loader = true;
       const storedSchedule = JSON.parse(sessionStorage.getItem('bibleSchedule') as string);
       if (storedSchedule) {
@@ -57,6 +59,7 @@ selectedDateScripture: { date: string; scripture: any; day: any;fullName?: strin
     const entryScripture = this.getScriptureForDate(dateObj)
     week.push({
       day,
+      bibleStudyDay: entryScripture.day,
       date: dateObj,
       scripture: entryScripture.scripture,
       fullName: entryScripture.fullName
@@ -122,7 +125,7 @@ selectedDateScripture: { date: string; scripture: any; day: any;fullName?: strin
   getTodaysSchedule() {
     let scripture: any;
     if (this.schedule) {
-      const today = new Date("2026-01-01"); // For testing, set a fixed date
+      const today = new Date(); 
       const formattedDate =
     today.getFullYear() + '-' +
     String(today.getMonth() + 1).padStart(2, '0') + '-' +
@@ -130,7 +133,7 @@ selectedDateScripture: { date: string; scripture: any; day: any;fullName?: strin
       scripture = this.schedule.find((entry: any) => entry.date === formattedDate);
       if (scripture) {
         // alert(`Today's Scripture (${formattedDate}): ${scripture}`);
-        this.selectedDateScripture = { date: formattedDate, scripture: scripture.fullName, day: scripture.day };
+        this.selectedDateScripture = { date: formattedDate, bibleStudyDay: scripture.bibleStudyDay, scripture: scripture.fullName, day: scripture.day };
         this.showModal = true;
       } else {
         this.selectedDateScripture = undefined;
@@ -144,6 +147,7 @@ selectedDateScripture: { date: string; scripture: any; day: any;fullName?: strin
   openModal(scripture?: any) {
   let scriptureObj = {
     day: scripture?.day,
+    bibleStudyDay: scripture.bibleStudyDay,
     date: this.formatToDMY(scripture?.date as string),
     scripture: scripture?.fullName
   }
@@ -158,8 +162,8 @@ selectedDateScripture: { date: string; scripture: any; day: any;fullName?: strin
   }
   copy() {
     const content: string = (`🌺🙇🏻‍♀🙇🏻‍♂🕊✝🕊🙇🏻‍♀🙇🏻‍♂🌺\n\n`+
-    `*రోజు*: ${this.selectedDateScripture?.day} \n\n` +
-    `*తేది*: ${this.formatToDMY(this.selectedDateScripture?.date as string)} \n\n` +
+    `*రోజు*: ${this.selectedDateScripture?.bibleStudyDay} \n\n` +
+    `*తేది*: ${this.formatToDMY(this.parseDMYtoDate(this.selectedDateScripture?.date as string))} \n\n` +
     `*${this.selectedDateScripture?.scripture}* \n\n`+
     `ప్రార్ధించు, పఠించు, ధ్యానించు మరియు ప్రకటించు\n\n`+
     `🙏🏻🙇🏻‍♀🙇🏻‍♂📖📖🧎🏻‍♀🧎🏻👨‍👨‍👦‍👦`)
@@ -167,12 +171,23 @@ selectedDateScripture: { date: string; scripture: any; day: any;fullName?: strin
     navigator.clipboard.writeText(content)
     .then(() => alert('Link copied!'));
   }
-  formatToDMY(dateStr: string): string {
+  formatToDMY(dateStr: any): string {
     const d = new Date(dateStr);
     return [
       String(d.getDate()).padStart(2, '0'),
       String(d.getMonth() + 1).padStart(2, '0'),
       d.getFullYear(),
     ].join('-');
+  }
+
+  parseDMYtoDate(dateStr: string): Date {
+    const parts = dateStr.split('-');
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1], 10) - 1;
+    const year = parseInt(parts[2], 10);
+    return new Date(year, month, day);
+  }
+  goToHome() {
+    this.router.navigateByUrl('/home');
   }
 }

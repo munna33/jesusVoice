@@ -65,3 +65,49 @@ footer {
     border: 1px solid #002349;
     width: 90%;
 }
+.title {
+    font-size: 14px;
+}
+.carousel-indicators {
+    button {
+        background: #002349;
+    }
+    
+}
+.carousel-indicators [data-bs-target] {
+  width: 30px;           /* line width */
+  height: 4px;           /* line thickness */
+  background-color: #aaa;
+  border: none;
+  margin: 0 4px;
+  opacity: 1;
+  border-radius: 2px;    /* slightly rounded edges */
+  transition: background-color 0.3s;
+}
+
+.carousel-indicators .active {
+  background-color: #002349; /* active slide - darker line */
+}
+.youtube-content {
+    width: 80%;
+    margin: auto !important;
+    // margin-bottom: 20% !important;
+}
+.bg-primary {
+    color: #ffffff !important;
+}
+.small {
+    font-size: 16px !important;
+}
+section {
+    text-align: left !important;
+    padding: 0px !important;
+    h2 {
+        padding : 5px !important;
+    }
+}
+.hero-section {
+    color: #000000 !important;
+    text-align: center;
+    padding: 100px 20px;
+}

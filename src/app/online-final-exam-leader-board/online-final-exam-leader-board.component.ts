@@ -10,13 +10,13 @@ import { config } from '../config/config';
 export class OnlineFinalExamLeaderBoardComponent {
   rankDetails: any[] = [];
   userDetails: any = {};
-  appType = sessionStorage.getItem('appType') || 'OLD_NEW';
+  appType = localStorage.getItem('appType') || 'OLD_NEW';
   expandedIndex: number | null = null;
 
 
   constructor(private resultService: ResultService) {}
   ngOnInit() {
-    this.userDetails = JSON.parse(sessionStorage.getItem('user') as string);
+    this.userDetails = JSON.parse(localStorage.getItem('user') as string);
     const shhetID = config.GOOGLE_SHEETS_B5.FINAL_QUIZ_RESULTS.OLD_NEW;
     this.resultService.getFinalExamResults(shhetID, this.appType).subscribe((data: any) => {
       this.rankDetails = this.getRanks(data);

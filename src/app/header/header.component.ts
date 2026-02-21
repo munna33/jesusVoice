@@ -9,15 +9,15 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   isUserLoggedIn: boolean = false;
   constructor(private router: Router) {
-    this.isUserLoggedIn = JSON.parse(sessionStorage.getItem('user') as string) ? true : false;
+    this.isUserLoggedIn = JSON.parse(localStorage.getItem('user') as string) ? true : false;
   }
   logout() {
-    sessionStorage.removeItem('user')
+    localStorage.removeItem('user')
     sessionStorage.removeItem('rankDetails')
     sessionStorage.removeItem('yourScoreDetails')
     sessionStorage.removeItem('totalDays')
     sessionStorage.removeItem('quizChapters')
-    sessionStorage.removeItem('appType')
+    localStorage.removeItem('appType')
     sessionStorage.removeItem('onlineQuizRanks')
     sessionStorage.removeItem('onlineQuizRanksDetails')
     sessionStorage.removeItem('puzzleRanks')

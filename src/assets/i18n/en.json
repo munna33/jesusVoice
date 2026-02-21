@@ -1,0 +1,41 @@
+{
+  "HOME": {
+    "TITLE": "Welcom to Voice Of Jesus",
+	"SUB_TITLE":"Growing together in faith, hope, and love.",
+	"PROGRAM_NAME": "Bible Study Program - 2026",
+	"PROGRAM_TAG": "Join our Bible Study journey and deepen your faith.",
+	"PROGRAM_DURATION":"(January 1st - December 20th)",
+	"SCHEDULE_TXT":"Bible Study Schedule",
+     "PROGRAM_BATCH_TXT": "Bible Study In 354 Days",
+	"GET_REG_TXT":"Get Your Registration ID!",
+	"REG_LINK_TXT":"Register Here!",
+	"PRAYER_REQ_TXT":"For Prayer Requests",
+	"YOUTUBE_TITLE": "Watch & Support Our Channel",
+	"PREV_TXT": "Previous",
+	"NEXT_TXT": "Next",
+	"THANK_YOU_TXT": "Thank You",
+	"PRAYER_REQ_SUCCESS_TXT":"Your prayer request has been submitted successfully!",
+	"CLOSE_TXT":"Close"
+  },
+   "LOGIN": {
+    "OLD_NEW_TITLE": "Old + New Testaments",
+    "NEW_TITLE": "New Testament",
+    "LOGIN_HEADING": "Login",
+    "FULL_NAME": "Full Name",
+    "REG_ID": "Registration ID",
+    "LOGIN_BTN": "Log In",
+    "GO_BACK_BTN": "Go To Home Page"
+  },
+  "PROFILE": {
+    "NAME": "Name",
+    "REG_ID": "Registration ID",
+    "ADDRESS": "Address",
+    "RANK": "Your Rank",
+    "SCORE": "Your Score",
+    "ATTEMPTED_DAYS": "Attempted Days",
+    "QUIZ_DETAILS": "Quiz Details",
+    "RANKS_DASHBOARD": "Ranks Dashboard",
+    "DAILY_QUIZ": "Daily Quiz Questions",
+    "ONLINE_QUIZ": "Online Quiz Launch"
+  }
+}

@@ -18,29 +18,10 @@ export class AboutComponent {
   constructor(private userService: UsermanagementService) {
 
   }
-  ngOnInit() {
-    this.userService.getYoutubeVideos().subscribe(data => {
-      if(data) {
-        this.youtubeList = this.formatYouTubeData(data);
-      }
-    })
-  }
-  formatYouTubeData(data: any) {
-  const result = data.map((item: any) => {
-      return {
-        ...item,
-        title: item.snippet.title,
-        thumbnail: item.snippet.thumbnails.medium.url
-      }
-    })
-    return result;
-  }
+
+
   goBack() {
     window.history.back();
   }
-  trackVideoClick(title: any) {
-    this.userService.sendEvent('YoutubeClick',{
-      title
-    })
-  }
+
 }

@@ -25,12 +25,12 @@ export class OnlineQuizChaptersComponent {
   }
   ngOnInit() {
     
-    this.appType = sessionStorage.getItem('appType') as string;
-    if(this.isFinalQuiz) {
-      this.loadFinalQuizData();
-    } else {
+    this.appType = localStorage.getItem('appType') as string;
+    // if(this.isFinalQuiz) {
+    //   this.loadFinalQuizData();
+    // } else {
       this.loadRegularQuizData();
-    }
+    // }
   }
   loadFinalQuizData() {
     let quizDetailsID = config.GOOGLE_SHEETS_B5.FINAL_QUIZ.OLD_NEW;
@@ -60,14 +60,8 @@ export class OnlineQuizChaptersComponent {
     }
   }
   loadRegularQuizData() {  
-    let quizDetailsID =
-      this.appType === 'OLD_NEW'
-        ? config.GOOGLE_SHEETS_B5.ONLINE_QUIZ.OLD_NEW
-        : config.GOOGLE_SHEETS_B5.ONLINE_QUIZ.NEW;
-    let quizResultID =
-      this.appType === 'OLD_NEW'
-        ? config.GOOGLE_SHEETS_B5.ONLINE_QUIZ_RESULTS.OLD_NEW
-        : config.GOOGLE_SHEETS_B5.ONLINE_QUIZ_RESULTS.NEW;
+    let quizDetailsID = config.GOOGLE_SHEETS_B6.ONLINE_QUIZ;
+    let quizResultID = config.GOOGLE_SHEETS_B6.ONLINE_QUIZ_RESULTS;
 
     if (sessionStorage.getItem('quizChapters')) {
       this.loader = false;
@@ -76,7 +70,7 @@ export class OnlineQuizChaptersComponent {
       );
       this.loadQuizRankData(quizResultID, this.questionData)
     } else {
-      this.resultService.getOnlineQuiz(quizDetailsID).subscribe((data) => {
+      this.resultService.getOnlineQuizDetails(quizDetailsID).subscribe((data) => {
         if (data) {
           // this.questionData = data;
           this.loadQuizRankData(quizResultID, data)
@@ -151,7 +145,7 @@ export class OnlineQuizChaptersComponent {
   launchQuiz(option: string) {
     this.router.navigateByUrl('/bible-study/online-quiz', {
       state: {
-        quizData: this.questionData[option].Questions,
+        quizData: this.getRandomUniqueItems(this.questionData[option].Questions, 10),
         user: this.userDetails,
         chapterName: option,
         isFinalQuiz: this.isFinalQuiz

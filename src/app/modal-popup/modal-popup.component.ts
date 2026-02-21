@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { ResultService } from '../services/result.service';
+import { config } from '../config/config';
 @Component({
   selector: 'app-modal-popup',
   templateUrl: './modal-popup.component.html',
@@ -20,7 +21,7 @@ export class ModalPopupComponent {
   constructor(private _bsModalRef: BsModalRef, private resultService: ResultService) { }
 
   public ngOnInit(): void {
-    this.appType = sessionStorage.getItem('appType') as string;
+    this.appType = localStorage.getItem('appType') as string;
   }
 
   public onConfirm(): void {
@@ -32,19 +33,26 @@ export class ModalPopupComponent {
       this.onClose.next(false);
       this._bsModalRef.hide();
   }
-  getQuestion() {
+  getQuestion(dayData: any) {
     this.loader = true;
-    if(!this.formData || this.formData?.length == 0) {
-      this.formData = sessionStorage.getItem('formData') ? JSON.parse(sessionStorage.getItem('formData') || '') : this.formData
-    }
-    const docName = this.appType === 'OLD_NEW' ? 'BS5ON_'+this.data.Day : 'BS5N_'+this.data.Day;
-    const id = this.formData.find((item : any) => item.name === docName )?.id
-    this.resultService.getQuestion(id).subscribe(data => {
+    this.resultService.getDailyQuizQuestion(dayData?.Day, config.GOOGLE_SHEETS_B6.DAILY_QUIZ).subscribe((res: any) => {
       this.loader = false;
-      if(data) {
-        this.questionData = data;
-      } 
+      if(res) {
+        this.questionData = res;
+      }
     })
+    // if(!this.formData || this.formData?.length == 0) {
+    //   this.formData = sessionStorage.getItem('formData') ? JSON.parse(sessionStorage.getItem('formData') || '') : this.formData
+    // }
+    // const docName = this.appType === 'OLD_NEW' ? 'BS5ON_'+this.data.Day : 'BS5N_'+this.data.Day;
+    // const id = this.formData.find((item : any) => item.name === docName )?.id
+    // this.resultService.getQuestion(id).subscribe(data => {
+    //   this.loader = false;
+    //   if(data) {
+    //     this.questionData = data;
+    //   } 
+    // })
+
   }
   
 }

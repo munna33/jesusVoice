@@ -2,6 +2,7 @@ import { Component, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UsermanagementService } from '../services/usermanagement.service';
 import { config } from '../config/config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-register',
@@ -22,7 +23,7 @@ export class UserRegisterComponent {
   loader = false;
   isUserRegistered = false;
   whatsAppLink = config.WHATSAP_GROUP_LINK ;
-  constructor(private service: UsermanagementService) { 
+  constructor(private service: UsermanagementService,private router: Router) { 
     this.whatsAppLink = atob(this.whatsAppLink);
   }
 
@@ -60,4 +61,7 @@ export class UserRegisterComponent {
   navigator.clipboard.writeText(regID)
     .then(() => alert('Link copied!'));
 }
+  goToHome() {
+    this.router.navigateByUrl('/home');
+  }
 }

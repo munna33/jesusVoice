@@ -12,11 +12,8 @@ export class OnlineQuizLeaderboardComponent {
   userDetails: any = {};
   constructor(private resultService: ResultService) {}
   ngOnInit() {
-    this.userDetails = JSON.parse(sessionStorage.getItem('user') as string);
-    const shhetID =
-      sessionStorage.getItem('appType') === 'OLD_NEW'
-        ? config.GOOGLE_SHEETS_B5.ONLINE_QUIZ_RESULTS.OLD_NEW
-        : config.GOOGLE_SHEETS_B5.ONLINE_QUIZ_RESULTS.NEW;
+    this.userDetails = JSON.parse(localStorage.getItem('user') as string);
+    const shhetID =config.GOOGLE_SHEETS_B6.ONLINE_QUIZ_RESULTS;
     if (!sessionStorage.getItem('onlineQuizRanks')) {
       if (!sessionStorage.getItem('onlineQuizRanksDetails')) {
         this.resultService

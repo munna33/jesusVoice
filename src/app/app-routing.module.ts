@@ -8,16 +8,19 @@ import { AddQuizComponent } from './admin-dashboard/add-quiz/add-quiz.component'
 import { RankDetailsComponent } from './rank-details/rank-details.component';
 import { OnlineQuizComponent } from './online-quiz/online-quiz/online-quiz.component';
 import { OnlineQuizChaptersComponent } from './online-quiz-chapters/online-quiz-chapters/online-quiz-chapters.component';
-import { WelcomePageComponent } from './welcome-page/welcome-page.component';
+import { DailyQuiz } from './daily-quiz/daily-quiz';
 import { LeaderBoardComponent } from './leader-board/leader-board.component';
 import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { CommonModule } from '@angular/common';
 import { UserRegisterComponent } from './user-register/user-register.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 const routes: Routes = [
   {path:"home", component: HomeComponent},
   {path:"register", component: UserRegisterComponent},
+  {path:"about", component: AboutComponent},
+  {path:"privacy-policy", component: PrivacyPolicyComponent},
   {path:"bible-study", loadChildren: () => import('./bible-study/bible-study.module').then(m => m.BibleStudyModule)},
   {path:"", redirectTo:"/home", pathMatch: 'full'}
 ];

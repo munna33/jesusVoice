@@ -18,7 +18,8 @@ import { HttpClient } from '@angular/common/http';
 export class OnlineQuizComponent implements OnInit {
   @ViewChild('video', { static: true }) video!: ElementRef<HTMLVideoElement>;
   @ViewChild('canvas', { static: true }) canvas!: ElementRef<HTMLCanvasElement>;
-
+ @ViewChild('certificateCanvas', { static: true })
+  canvasRef!: ElementRef<HTMLCanvasElement>;
   private stream!: MediaStream;
   private captureInterval: any;
 
@@ -45,6 +46,7 @@ export class OnlineQuizComponent implements OnInit {
   userTrackingData: any;
   trackID: string = '';
   isFinalQuiz: boolean = false;
+  showCertificate: boolean = false;
 
   @HostListener('document:keydown', ['$event'])
   onKeyDown(event: KeyboardEvent) {
@@ -93,15 +95,10 @@ export class OnlineQuizComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.trackID =
-      sessionStorage.getItem('appType') === 'OLD_NEW'
-        ? config.GOOGLE_SHEETS_B5.ONLINE_QUIZ_TRACKING.OLD_NEW
-        : config.GOOGLE_SHEETS_B5.ONLINE_QUIZ_TRACKING.NEW;
+    this.trackID =config.GOOGLE_SHEETS_B5.ONLINE_QUIZ_TRACKING.OLD_NEW;
     this.QUIZRESULT_ID = this.isFinalQuiz
-      ? config.GOOGLE_SHEETS_B5.FINAL_QUIZ_RESULTS.OLD_NEW
-      : sessionStorage.getItem('appType') === 'OLD_NEW'
-      ? config.GOOGLE_SHEETS_B5.ONLINE_QUIZ_RESULTS.OLD_NEW
-      : config.GOOGLE_SHEETS_B5.ONLINE_QUIZ_RESULTS.NEW;
+      ? config.GOOGLE_SHEETS_B6.FINAL_QUIZ_RESULTS
+      : config.GOOGLE_SHEETS_B6.ONLINE_QUIZ_RESULTS;
 
     window.history.pushState(null, '', window.location.href);
     window.onpopstate = () => {
@@ -111,7 +108,7 @@ export class OnlineQuizComponent implements OnInit {
     };
     const requestPayload = {
       regID: this.userDetails?.RegID,
-      appType: sessionStorage.getItem('appType'),
+      appType: localStorage.getItem('appType'),
       quizID: this.chapterName,
       finalQuiz: this.isFinalQuiz,
     };
@@ -132,7 +129,7 @@ export class OnlineQuizComponent implements OnInit {
       regID: this.userDetails?.RegID,
       name: this.userDetails?.Name,
       quizID: chapterName,
-      appType: sessionStorage.getItem('appType'),
+      appType: localStorage.getItem('appType'),
       finalQuiz: this.isFinalQuiz,
     };
     this.startProctoring();
@@ -143,7 +140,7 @@ export class OnlineQuizComponent implements OnInit {
     //   "Attempted": true,
     //   "Date": new Date(),
     // }
-    this.resultService.trackSubmit(this.trackID, req).subscribe((data) => {});
+    this.resultService.trackSubmit(req).subscribe((data) => {});
     this.interval = setInterval(() => {
       if (this.timeLeft > 0) {
         this.timeLeft--;
@@ -212,7 +209,7 @@ export class OnlineQuizComponent implements OnInit {
     }
   }
   submitQuiz() {
-    this.captureAndSend();
+    // this.captureAndSend();
     const requestObj = this.prepareTheResult();
     this.resultService
       .submitQuiz(this.QUIZRESULT_ID, requestObj)
@@ -238,24 +235,30 @@ export class OnlineQuizComponent implements OnInit {
         );
 
         sessionStorage.removeItem('quizChapters');
+        sessionStorage.removeItem('onlineQuizRanks');
         this.isFinalQuiz
           ? sessionStorage.removeItem('onlineFinalQuizRanksDetails')
           : sessionStorage.removeItem('onlineQuizRanksDetails');
+        
       });
       const messageBody = this.examResultTemplate(
         this.userDetails?.Name,
         this.score,
         0
       );
-    this.resultService.sendResults({
-      to: '91'+this.userDetails?.Contact || '',
-      message: messageBody,
-    }).subscribe();
+    // this.resultService.sendResults({
+    //   to: '91'+this.userDetails?.Contact || '',
+    //   message: messageBody,
+    // }).subscribe();
     this.quizCompleted = true;
     this.isQuizStarted = false;
     this.questionNumber = 0;
+    setTimeout(() => {
+      this.drawCertificate();
+    }, 2000);
+   
 
-    this.stopCameraAndProctoring();
+    // this.stopCameraAndProctoring();
   }
   examResultTemplate(name: string, marks: number, rank: number) {
   return (
@@ -276,7 +279,7 @@ export class OnlineQuizComponent implements OnInit {
   }
   goToDashboard() {
     // this._location.back();
-    this.stopCameraAndProctoring();
+    // this.stopCameraAndProctoring();
     this.router.navigateByUrl('/bible-study/dashboard');
   }
 
@@ -392,7 +395,7 @@ export class OnlineQuizComponent implements OnInit {
         reason,
         time: new Date(),
         regID: this.userDetails?.RegID,
-        appType: sessionStorage.getItem('appType'),
+        appType: localStorage.getItem('appType'),
       })
       .subscribe();
   }
@@ -450,7 +453,7 @@ export class OnlineQuizComponent implements OnInit {
         frame: image,
         timestamp: new Date(),
         regID: this.userDetails?.RegID,
-        appType: sessionStorage.getItem('appType'),
+        appType: localStorage.getItem('appType'),
       })
       .subscribe();
     // this.http
@@ -482,4 +485,97 @@ export class OnlineQuizComponent implements OnInit {
     e.preventDefault();
     return false;
   };
+  downloadCertificate() {
+    const canvas = this.canvasRef.nativeElement;
+    const link = document.createElement('a');
+    link.download = `${this.userDetails?.Name}_Certificate.png`;
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+  }
+  drawCertificate() {
+  const canvas = this.canvasRef.nativeElement;
+  const ctx = canvas.getContext('2d')!;
+
+  const img = new Image();
+  img.src = 'assets/images/certificate.png';
+
+  img.onload = () => {
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    ctx.drawImage(img, 0, 0);
+
+    // COMMON SETTINGS
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const lineGap = 50; // 👈 control spacing here
+
+    let currentY = centerY - 140;
+
+    // -------- NAME --------
+    ctx.font = 'bold 56px Poppins';
+    ctx.fillStyle = '#0f3d2e';
+    ctx.fillText(this.userDetails?.Name, centerX, currentY);
+
+    currentY += lineGap + 20;
+
+    // -------- TEXT LINE 1 --------
+    ctx.font = '32px Poppins';
+    ctx.fillStyle = '#1f2937';
+    ctx.fillText(
+      'In recognition of attempting the Online Quiz',
+      centerX,
+      currentY
+    );
+
+    currentY += lineGap;
+
+    // -------- CHAPTER NAME (BOLD) --------
+    ctx.font = 'bold 32px Poppins';
+    ctx.fillText(
+      `(${this.chapterName})`,
+      centerX,
+      currentY
+    );
+
+    currentY += lineGap;
+
+    // -------- TEXT LINE 2 --------
+    ctx.font = '32px Poppins';
+    ctx.fillText(
+      'as part of the Bible Study Program and scoring',
+      centerX,
+      currentY
+    );
+
+    currentY += lineGap;
+
+    // -------- SCORE (BOLD) --------
+    ctx.font = 'bold 34px Poppins';
+    ctx.fillStyle = '#0f3d2e';
+    ctx.fillText(
+      `${this.score} / 10 marks`,
+      centerX,
+      currentY
+    );
+
+    currentY += lineGap + 7;
+
+    // -------- CONGRATULATIONS --------
+    ctx.font = 'italic 30px Poppins';
+    ctx.fillStyle = '#065f46';
+    ctx.fillText(
+      'Congratulations on your dedication to learning God’s Word.',
+      centerX,
+      currentY
+    );
+  };
+
+  this.showCertificate = true;
+}
+
+
 }

@@ -1,0 +1,121 @@
+<div class="container mt-3 mb-3">
+   
+    <div class="bg-primary d-flex mb-2">
+      <button class="col-4 text-start ml-1 btn prayer-request-btn" (click)="goToHome()">
+          <i class="fa fa-arrow-left me-2"></i> Home
+      </button>
+      <h6 class="col p-2 mb-0 text-start">Daily Quiz Details</h6>
+    </div>
+  
+  <full-calendar #calendar [options]="calendarOptions">
+  </full-calendar>
+  <div id='gfg' class="mt-3 tabs-container">
+    <tabset class="mt-3 custom-tabs">
+      <tab class="col p-0" heading="Daily Quiz">
+        <h5 class="text-bg-danger text-center p-2 mt-4 mb-4" *ngIf="!todaysQuestionData?.Day && !showMessage && !loader">Future dates not allowed</h5>
+        <div class="card m-2 question-card shadow-sm" *ngIf="showQuestion && todaysQuestionData && todaysQuestionData?.Day" >
+          <div class="card-body">
+        <div class="row">
+          <p class="col-3 mb-0"> Day: <strong>
+          <h6 class="mb-0">{{todaysQuestionData?.Day}}</h6>
+            </strong></p>
+          <p class="col-4 mb-0"> Date: <strong>
+          <h6 class="mb-0">{{todaysQuestionData?.Date | date: 'dd-MM-yyyy'}}</h6>
+            </strong></p>
+            <div class="col-4 mb-0 text-end d-flex"><strong class="text-center">No.of People Answered</strong><h3 class="ml-3 badge">{{quizResultData?.quizData?.[0]['Day_'+todaysQuestionData?.Day]?.length}}</h3></div>
+        </div>
+        <hr/>
+           <!-- <h5 class="text-bg-info text-center p-2 mt-4 mb-4" *ngIf="enableQuizForDay">You already submitted your answer</h5> -->
+           
+        <!-- Question -->
+        <h5 class="card-title mb-4 mt-4" *ngIf="todaysQuestionData?.Question">
+          <strong>Q: <span>{{ todaysQuestionData?.Question }}</span></strong>
+        </h5>
+        <!-- Multiple Choice Options -->
+        <div *ngIf="todaysQuestionData?.QType?.toLowerCase() === 'mcq' && !enableQuizForDay">
+          <div class="form-check mb-3 mt-3"
+            *ngFor="let opt of todaysQuestionData?.Options?.split(','); let i = index">
+            <input class="form-check-input " type="radio" name="option" [id]="'opt' + i" [value]="opt"
+          [(ngModel)]="selectedAnswer" />
+            <label class="form-check-label" [for]="'opt' + i">
+          {{ opt }}
+            </label>
+          </div>
+        </div>
+        <!-- Text Answer -->
+        <div *ngIf="todaysQuestionData?.QType === 'text' && !enableQuizForDay" >
+          <textarea class="form-control" rows="3" placeholder="Type your answer..."
+            [(ngModel)]="selectedAnswer"></textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button class="btn btn-primary bg-primary w-100 mt-3" (click)="submitAnswer()"
+        *ngIf="!enableQuizForDay"
+          [disabled]="isSubmitDisabled()">
+          Submit
+        </button>
+        
+        <p class="mt-4" *ngIf="enableQuizForDay"><strong class="text-success"><u>Your Answer: </u></strong> &nbsp;&nbsp;{{selecteDayQuizData?.Answer}} </p>
+        
+          </div>
+        </div>
+        <div *ngIf="showMessage" class="mt-3 text-center "
+          [ngClass]="{'success text-bg-success': showMessage != 'No schedule found', 'text-bg-danger': showMessage == 'No schedule found'}">
+          {{showMessage}}
+        </div>
+      </tab>
+      <tab class="col p-0" heading="Your Score">
+        <div class="card m-2 question-card shadow-sm">
+          <div class="card-body" *ngIf="yourResult && yourResult.length > 0">
+        <div>
+          <div class="row ml-1 mr-1 pt-1 pb-1 bg-primary">
+          <!-- <div class="d-flex"> -->
+            <span class="col-3">Day</span>
+            <span class="col-5">Answer</span>
+            <span class="col-3 text-start">Marks</span>
+          </div>
+        </div>
+        <ul class="ml-1 mr-1 list-group" *ngFor="let item of yourResult; let i = index">
+          <li class="list-group-item mb-1" aria-current="true" (click)="openModalWithClass(item)">
+            <div class="row">
+          <!-- <div class="d-flex"> -->
+            <span class="col-3">{{'Day '+item?.Day}}</span>
+            <strong class="col-5">{{item?.Answer}}</strong>
+            <span class="col-3 text-start">{{item.Marks}}</span>
+          </div>
+            <!-- </div> -->
+          </li>
+        </ul>
+          </div>
+        </div>
+        
+      </tab>
+      <tab class="col p-0" heading="Ranks" >
+        <div class="card m-2 question-card shadow-sm">
+           <div class="card-body">
+          <div class="row ml-1 mr-1 pt-1 pb-1 bg-primary">
+            <span class="col-5">Registration ID</span>
+            <span class="col-3 text-start">Marks</span>
+             <span class="col-3">Rank</span>
+          </div>
+          <ul class="ml-1 mr-1 list-group" *ngFor="let item of ranksData">
+          <li class="list-group-item mb-1" aria-current="true"  [ngClass]="{'active-user': item?.registrationID?.toLowerCase() == userDetails.RegID?.toLowerCase()}">
+            <div class="row">
+            <strong class="col-5">{{item?.registrationID}}</strong>
+            <span class="col-3 text-start">{{item?.totalMarks}}</span>
+               <span class="col-3">{{item?.rank}}</span>
+          </div>
+          </li>
+        </ul>
+        </div>
+        </div>
+      </tab>
+    </tabset>
+
+   <div class="spinner-border text-primary" role="status" *ngIf="loader" style="position: absolute;
+    top: 103%;
+    left: 47%;
+    scale: 2;z-index: 99">
+    </div>
+  </div>
+</div>

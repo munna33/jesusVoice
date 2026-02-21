@@ -19,7 +19,7 @@ export class RankDetailsComponent {
     
   }
   ngOnInit() {
-     this.userDetails = JSON.parse(sessionStorage.getItem('user') as string)
+     this.userDetails = JSON.parse(localStorage.getItem('user') as string)
 if (this.router.getCurrentNavigation()?.extras?.state) {
       this.rankDetails = this.router.getCurrentNavigation()?.extras.state
     } else {

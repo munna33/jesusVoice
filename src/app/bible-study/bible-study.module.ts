@@ -4,7 +4,7 @@ import { BibleStudyComponent } from './bible-study.component';
 import { RouterModule } from '@angular/router';
 import { LoginComponent } from '../login/login.component';
 import { AboutComponent } from '../about/about.component';
-import { WelcomePageComponent } from '../welcome-page/welcome-page.component';
+import { DailyQuiz } from '../daily-quiz/daily-quiz';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { QuizComponent } from '../quiz/quiz.component';
 import { AdminDashboardComponent } from '../admin-dashboard/admin-dashboard.component';
@@ -36,6 +36,10 @@ import { AccordionModule } from 'ngx-bootstrap/accordion';
 import { OnlineFinalExamLeaderBoardComponent } from '../online-final-exam-leader-board/online-final-exam-leader-board.component';
 import { BibleScheduleComponent } from '../bible-schedule/bible-schedule.component';
 import { CalendarComponent } from '../calendar/calendar.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import interactionPlugin from '@fullcalendar/interaction';
+import { TranslateModule } from '@ngx-translate/core';
 
 
 @NgModule({
@@ -54,7 +58,7 @@ import { CalendarComponent } from '../calendar/calendar.component';
     ExamResultsModalPopupComponent,
     OnlineQuizComponent,
     OnlineQuizChaptersComponent,
-    WelcomePageComponent,
+    DailyQuiz,
     LeaderBoardComponent,
     OnlineQuizLeaderboardComponent,
     WeeklyPuzzleLeaderboardComponent,
@@ -69,6 +73,7 @@ import { CalendarComponent } from '../calendar/calendar.component';
     CarouselModule,
     HttpClientModule,
     PaginationModule,
+    FullCalendarModule,
     ModalModule.forChild(),
     TabsModule.forRoot(),
     AccordionModule.forRoot(),
@@ -80,8 +85,8 @@ import { CalendarComponent } from '../calendar/calendar.component';
                 // Add child routes here, e.g.:
                 // { path: 'details', component: BibleStudyDetailsComponent }
                 { path: "login", component: LoginComponent },
-                { path: "about", component: AboutComponent },
-                { path: "", component: WelcomePageComponent },
+                // { path: "about", component: AboutComponent },
+                { path: "daily-quiz", component: DailyQuiz },
                 { path: "dashboard", component: DashboardComponent },
                 { path: "quiz", component: QuizComponent },
                 { path: "admin", component: AdminDashboardComponent },
@@ -94,7 +99,8 @@ import { CalendarComponent } from '../calendar/calendar.component';
                 { path: "", redirectTo: "/", pathMatch: 'full' }
             ]
         }
-    ])
+    ]),
+    TranslateModule
 ],
     exports: [
         

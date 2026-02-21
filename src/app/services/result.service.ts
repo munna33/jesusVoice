@@ -44,7 +44,7 @@ export class ResultService {
     const url = this.baseUrl + '/submitQuiz/'+ sheetId;
     return this.httpClient.post(url, requestObj)
   }
-  trackSubmit(sheetId: any, requestObj: any) {
+  trackSubmit(requestObj: any) {
     const url = this.baseUrl + '/admin/track';
     return this.httpClient.post(url, requestObj)
   }
@@ -90,7 +90,20 @@ export class ResultService {
      return this.httpClient.get(url);
   }
   getBibleSchedule(sheetId: any) {
-    const url = this.baseUrl + '/bibleStudy/schedule/'+sheetId;
+    // const url = this.baseUrl + '/bibleStudy/schedule/'+sheetId;
+    const url = '/assets/data/bible-schedule.json';
     return this.httpClient.get(url);
+  }
+  getDailyQuizQuestion(payload: any, sheetId: string) {
+    const url = this.baseUrl + '/bibleStudy/dailyQuiz/'+sheetId+'?day='+ payload;
+    return this.httpClient.get(url,payload)
+  }
+  saveDailyQuizQuestion(payload: any) {
+     const url = this.baseUrl + '/admin/saveDailyQuizData';
+     return this.httpClient.post(url, payload)
+  }
+   getDailyQuizQuestionResults() {
+    const url = this.baseUrl + '/admin/getDailyQuizScore';
+    return this.httpClient.get(url)
   }
 }
